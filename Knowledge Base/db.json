@@ -1,0 +1,721 @@
+{
+  "components": {
+    "form": {
+      "ModusAutocomplete": {
+        "description": "Input with autocomplete suggestions",
+        "properties": [
+          {
+            "name": "label",
+            "type": "string",
+            "description": "The autocomplete's label",
+            "default": "undefined"
+          },
+          {
+            "name": "options",
+            "type": "ModusAutocompleteOption[]",
+            "description": "Array of options for autocomplete",
+            "default": "[]"
+          },
+          {
+            "name": "clearable",
+            "type": "boolean",
+            "description": "Whether input has clear button",
+            "default": "false"
+          }
+        ],
+        "events": [
+          {
+            "name": "optionSelected",
+            "description": "Fires when option is selected",
+            "emits": "ModusAutocompleteOption"
+          }
+        ],
+        "componentName": "ModusAutocomplete"
+      },
+      "ModusCheckbox": {
+        "description": "Checkbox selection control",
+        "properties": [
+          {
+            "name": "checked",
+            "type": "boolean",
+            "description": "Whether the checkbox is checked",
+            "default": "false"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "description": "Whether the checkbox is disabled",
+            "default": "false"
+          },
+          {
+            "name": "indeterminate",
+            "type": "boolean",
+            "description": "Whether the checkbox is in an indeterminate state",
+            "default": "false"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "description": "The checkbox's label",
+            "default": "undefined"
+          }
+        ],
+        "events": [
+          {
+            "name": "valueChange",
+            "description": "Fires when checkbox state changes",
+            "emits": "boolean"
+          }
+        ],
+        "componentName": "ModusCheckbox"
+      },
+      "ModusDateInput": {
+        "description": "Calendar input field for selecting dates",
+        "properties": [
+          {
+            "name": "label",
+            "type": "string",
+            "description": "The date input's label",
+            "default": "undefined"
+          },
+          {
+            "name": "format",
+            "type": "string",
+            "description": "The date format",
+            "default": "dd/mm/yyyy"
+          },
+          {
+            "name": "min",
+            "type": "string",
+            "description": "Minimum selectable date",
+            "default": "undefined"
+          },
+          {
+            "name": "max",
+            "type": "string",
+            "description": "Maximum selectable date",
+            "default": "undefined"
+          },
+          {
+            "name": "showCalendarIcon",
+            "type": "boolean",
+            "description": "Whether to show calendar icon",
+            "default": "true"
+          }
+        ],
+        "events": [
+          {
+            "name": "valueChange",
+            "description": "Fires when date value changes",
+            "emits": "string"
+          },
+          {
+            "name": "dateInputBlur",
+            "description": "Fires when input loses focus",
+            "emits": "void"
+          }
+        ],
+        "componentName": "ModusDateInput"
+      },
+      "ModusSelect": {
+        "description": "Dropdown selection component",
+        "properties": [
+          {
+            "name": "label",
+            "type": "string",
+            "description": "Label text for the select component",
+            "default": "undefined"
+          },
+          {
+            "name": "options",
+            "type": "array",
+            "description": "Array of options for the select",
+            "default": "[]"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "description": "Whether the select is disabled",
+            "default": "false"
+          },
+          {
+            "name": "multiple",
+            "type": "boolean",
+            "description": "Whether multiple options can be selected",
+            "default": "false"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "description": "Placeholder text when no option is selected",
+            "default": "undefined"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "description": "Whether the select is required",
+            "default": "false"
+          },
+          {
+            "name": "errorText",
+            "type": "string",
+            "description": "Error message text",
+            "default": "undefined"
+          },
+          {
+            "name": "helperText",
+            "type": "string",
+            "description": "Helper text below the select",
+            "default": "undefined"
+          }
+        ],
+        "events": [
+          {
+            "name": "valueChange",
+            "description": "Fires when selection changes",
+            "emits": "any"
+          }
+        ],
+        "componentName": "ModusSelect"
+      },
+      "ModusRadioGroup": {
+        "description": "Radio button group component",
+        "properties": [
+          {
+            "name": "checked-id",
+            "type": "string",
+            "description": "The id of the checked radio button",
+            "default": "undefined",
+            "required": true
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "The name of the radio group. Used to group individual radio elements into one group.",
+            "default": "undefined",
+            "required": true
+          },
+          {
+            "name": "radioButtons",
+            "type": "RadioButton[]",
+            "description": "The radio buttons",
+            "default": "[]",
+            "required": true
+          },
+          {
+            "name": "ariaLabel",
+            "type": "string",
+            "description": "The radio group's ariaLabel",
+            "default": "undefined"
+          },
+          {
+            "name": "size",
+            "type": "string",
+            "description": "The radio group's size",
+            "options": ["small", "medium"],
+            "default": "medium"
+          }
+        ],
+        "events": [
+          {
+            "name": "buttonClick",
+            "description": "Fires on radio button click",
+            "emits": "RadioButton"
+          }
+        ],
+        "componentName": "ModusRadioGroup"
+      },
+      "ModusSwitch": {
+        "description": "Toggle switch component",
+        "properties": [
+          {
+            "name": "ariaLabel",
+            "type": "string",
+            "description": "The switch's ariaLabel",
+            "default": "undefined"
+          },
+          {
+            "name": "checked",
+            "type": "boolean",
+            "description": "Whether the switch is checked",
+            "default": "undefined"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "description": "Whether the switch is disabled",
+            "default": "undefined"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "description": "The switch label",
+            "default": "undefined"
+          },
+          {
+            "name": "size",
+            "type": "string",
+            "description": "The size of the switch",
+            "options": ["medium", "small"],
+            "default": "medium"
+          }
+        ],
+        "events": [
+          {
+            "name": "switchClick",
+            "description": "Fires on switch click",
+            "emits": "boolean"
+          }
+        ],
+        "componentName": "ModusSwitch"
+      },
+      "ModusTextInput": {
+        "description": "Text input field for capturing user input",
+        "properties": [
+          {
+            "name": "ariaLabel",
+            "type": "string",
+            "description": "The input's ariaLabel",
+            "default": "undefined"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "description": "The input's label",
+            "default": "undefined"
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "description": "The input's type",
+            "options": ["text", "password", "email", "search", "url"],
+            "default": "text"
+          },
+          {
+            "name": "errorText",
+            "type": "string",
+            "description": "The input's error state text",
+            "default": "undefined"
+          }
+        ],
+        "events": [
+          {
+            "name": "valueChange",
+            "description": "Fires on text input value change",
+            "emits": "string"
+          }
+        ],
+        "methods": [
+          {
+            "name": "focusInput",
+            "description": "Focus the input",
+            "returns": "Promise<void>"
+          }
+        ],
+        "componentName": "ModusTextInput"
+      },
+      "ModusTextareaInput": {
+        "description": "Textarea input component for multi-line text input",
+        "properties": [
+          {
+            "name": "ariaLabel",
+            "type": "string",
+            "description": "The textarea's ariaLabel",
+            "default": "undefined"
+          },
+          {
+            "name": "autoFocusInput",
+            "type": "boolean",
+            "description": "Sets autofocus on the textarea",
+            "default": "undefined"
+          },
+          {
+            "name": "autocorrect",
+            "type": "string|boolean",
+            "description": "Whether to activate automatic correction while the user is editing this field in Safari",
+            "options": ["on", "off", true, false],
+            "default": "undefined"
+          },
+          {
+            "name": "clearable",
+            "type": "boolean",
+            "description": "Whether the textarea has a clear button",
+            "default": "false"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "description": "Whether the textarea is disabled",
+            "default": "undefined"
+          },
+          {
+            "name": "enterkeyhint",
+            "type": "string",
+            "description": "Which action label to present for the enter key on virtual keyboards",
+            "options": ["enter", "done", "go", "next", "previous", "search", "send"],
+            "default": "undefined"
+          },
+          {
+            "name": "errorText",
+            "type": "string",
+            "description": "The textarea's error state text",
+            "default": "undefined"
+          },
+          {
+            "name": "helperText",
+            "type": "string",
+            "description": "The textarea's helper text displayed below the input",
+            "default": "undefined"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "description": "The textarea's label",
+            "default": "undefined"
+          },
+          {
+            "name": "maxLength",
+            "type": "number",
+            "description": "The textarea's maximum length",
+            "default": "undefined"
+          },
+          {
+            "name": "minLength",
+            "type": "number",
+            "description": "The textarea's minimum length",
+            "default": "undefined"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "description": "The textarea's placeholder text",
+            "default": "undefined"
+          },
+          {
+            "name": "readOnly",
+            "type": "boolean",
+            "description": "Whether the textarea's content is read-only",
+            "default": "undefined"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "description": "Whether the input is required",
+            "default": "undefined"
+          },
+          {
+            "name": "rows",
+            "type": "number",
+            "description": "Number of rows on textarea",
+            "default": "undefined"
+          },
+          {
+            "name": "size",
+            "type": "string",
+            "description": "The textarea's size",
+            "options": ["large", "medium"],
+            "default": "medium"
+          },
+          {
+            "name": "spellcheck",
+            "type": "string",
+            "description": "Whether to enable spell checking",
+            "options": ["large", "medium"],
+            "default": "medium"
+          },
+          {
+            "name": "textAlign",
+            "type": "boolean",
+            "description": "The textarea's text alignment",
+            "default": "false"
+          },
+          {
+            "name": "validText",
+            "type": "string",
+            "description": "The textarea's valid state text",
+            "default": "undefined"
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The textarea's value",
+            "default": "undefined"
+          }
+        ],
+        "events": [
+          {
+            "name": "valueChange",
+            "description": "Fires on textarea input value change",
+            "emits": "string"
+          }
+        ],
+        "methods": [
+          {
+            "name": "focusInput",
+            "description": "Focus the input",
+            "returns": "Promise<void>"
+          }
+        ],
+        "componentName": "ModusTextareaInput"
+      },
+      "ModusTimePicker": {
+        "description": "Time picker component for selecting time values",
+        "properties": [
+          {
+            "name": "allowedCharsRegex",
+            "type": "RegExp | string",
+            "description": "Regular expression to allow characters while typing the input. Default is `/[\\d:apm\\s]/gi` or `/[\\d:]/gi` based on the display format",
+            "default": "undefined"
+          },
+          {
+            "name": "ampm",
+            "type": "boolean",
+            "description": "Sets 12/24 hour format for the input string",
+            "default": "undefined"
+          },
+          {
+            "name": "ariaLabel",
+            "type": "string",
+            "description": "The input's ariaLabel",
+            "default": "undefined"
+          },
+          {
+            "name": "autoFocusInput",
+            "type": "boolean",
+            "description": "Sets autofocus on the input",
+            "default": "undefined"
+          },
+          {
+            "name": "autoFormat",
+            "type": "boolean",
+            "description": "Formats the text while typing in the input field",
+            "default": "undefined"
+          },
+          {
+            "name": "disableValidation",
+            "type": "boolean",
+            "description": "Disables default validation for the time input",
+            "default": "undefined"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "description": "Whether the input is disabled",
+            "default": "undefined"
+          },
+          {
+            "name": "errorText",
+            "type": "string",
+            "description": "Custom error text displayed for the input",
+            "default": "undefined"
+          },
+          {
+            "name": "helperText",
+            "type": "string",
+            "description": "Custom helper text displayed below the input",
+            "default": "undefined"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "description": "The input's label",
+            "default": "undefined"
+          },
+          {
+            "name": "max",
+            "type": "string",
+            "description": "Maximum time (in 24 hour format)",
+            "default": "undefined"
+          },
+          {
+            "name": "min",
+            "type": "string",
+            "description": "Minimum time (in 24 hour format)",
+            "default": "undefined"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "description": "The input's placeholder text",
+            "default": "undefined"
+          },
+          {
+            "name": "readOnly",
+            "type": "boolean",
+            "description": "Whether the input's content is read-only",
+            "default": "undefined"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "description": "Whether the input is required",
+            "default": "undefined"
+          },
+          {
+            "name": "size",
+            "type": "string",
+            "description": "The input's size",
+            "options": ["large", "medium"],
+            "default": "medium"
+          },
+          {
+            "name": "validText",
+            "type": "string",
+            "description": "The input's valid state text",
+            "default": "undefined"
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "description": "Value of the time entered into the input",
+            "default": "undefined"
+          }
+        ],
+        "events": [
+          {
+            "name": "timeInputBlur",
+            "description": "An event that fires on input value out of focus",
+            "emits": "ModusTimePickerEventDetails"
+          },
+          {
+            "name": "valueChange",
+            "description": "An event that fires on input value change",
+            "emits": "ModusTimePickerEventDetails"
+          }
+        ],
+        "methods": [
+          {
+            "name": "focusInput",
+            "description": "Focus the input",
+            "returns": "Promise<void>"
+          }
+        ],
+        "componentName": "ModusTimePicker"
+      },
+      "ModusNumberInput": {
+        "description": "Number input field for capturing numeric values",
+        "properties": [
+          {
+            "name": "ariaLabel",
+            "type": "string",
+            "description": "The input's ariaLabel",
+            "default": "undefined"
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "The input's currency",
+            "default": "''"
+          },
+          {
+            "name": "locale",
+            "type": "string",
+            "description": "The input's locale",
+            "default": "undefined"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "description": "Whether the input is disabled",
+            "default": "undefined"
+          },
+          {
+            "name": "errorText",
+            "type": "string",
+            "description": "The input's error state text",
+            "default": "undefined"
+          },
+          {
+            "name": "helperText",
+            "type": "string",
+            "description": "The input's helper text displayed below",
+            "default": "undefined"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "description": "The input's label",
+            "default": "undefined"
+          },
+          {
+            "name": "maxValue",
+            "type": "number",
+            "description": "The input's maximum value",
+            "default": "undefined"
+          },
+          {
+            "name": "minValue",
+            "type": "number",
+            "description": "The input's minimum value",
+            "default": "undefined"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "description": "The input's placeholder text",
+            "default": "undefined"
+          },
+          {
+            "name": "readOnly",
+            "type": "boolean",
+            "description": "Whether the input's content is read-only",
+            "default": "undefined"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "description": "Whether the input is required",
+            "default": "undefined"
+          },
+          {
+            "name": "size",
+            "type": "string",
+            "description": "The input's size",
+            "options": ["large", "medium"],
+            "default": "medium"
+          },
+          {
+            "name": "step",
+            "type": "number",
+            "description": "The input's step",
+            "default": "undefined"
+          },
+          {
+            "name": "textAlign",
+            "type": "string",
+            "description": "The input's text alignment",
+            "options": ["left", "right"],
+            "default": "left"
+          },
+          {
+            "name": "validText",
+            "type": "string",
+            "description": "The input's valid state text",
+            "default": "undefined"
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The input's value",
+            "default": "undefined"
+          }
+        ],
+        "events": [
+          {
+            "name": "valueChange",
+            "description": "An event that fires on input value change",
+            "emits": "string"
+          }
+        ],
+        "methods": [
+          {
+            "name": "focusInput",
+            "description": "Focus the input",
+            "returns": "Promise<void>"
+          }
+        ],
+        "componentName": "ModusNumberInput"
+      }
+    }
+  }
+}
