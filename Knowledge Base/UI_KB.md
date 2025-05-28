@@ -918,14 +918,15 @@ export default MyComponent;
 
 **Agent Answer:**
 References:
-Analyzing the requirements from the prompt, we need to create a side navigation with three main items: "Dashboard", "Reports", and "Settings". The "Dashboard" item should have a submenu with "Overview" and "Analytics". The side navigation should be in push mode and should collapse when clicked outside. The approach involves setting up the side navigation items and handling the submenu for "Dashboard". The side navigation will be configured to collapse when clicked outside.
+Analyzing the requirements from the prompt, we need to create a side navigation with three main items: "Dashboard", "Reports", and "Settings". The "Dashboard" item should have a submenu with "Overview" and "Analytics". We have a Navbar and we used it's DOM event `mainMenuClick` The side navigation should be in push mode and should collapse when clicked outside. The approach involves setting up the side navigation items and handling the submenu for "Dashboard". The side navigation will be configured to collapse when clicked outside.
 
 ```tsx
 import React, { useEffect, useRef, useState } from 'react';
-import { ModusSideNavigation, ModusSideNavigationItem } from '@trimble-oss/modus-react-components';
+import { ModusNavbar, ModusSideNavigation, ModusSideNavigationItem } from '@trimble-oss/modus-react-components';
 
 const MyComponent: React.FC = () => {
   const sideNavRef = useRef<any>(null);
+  const navbarRef = useRef<any>(null);
   const [sideNavExpanded, setSideNavExpanded] = useState(false);
 
   useEffect(() => {
@@ -957,6 +958,39 @@ const MyComponent: React.FC = () => {
           onSideNavItemClicked: selectionHandler,
         },
       ];
+    }
+
+    if (navbarRef.current) {
+      const element = navbarRef.current;
+      element.apps = [
+        {
+          description: 'The One Trimble Design System',
+          logoUrl: 'https://modus.trimble.com/favicon.svg',
+          name: 'Trimble Modus',
+          url: 'https://modus.trimble.com/',
+        },
+      ];
+      element.logoOptions = {
+        primary: {
+          url: 'https://modus.trimble.com/img/trimble-logo.svg',
+          height: 24,
+        },
+        secondary: {
+          url: 'https://modus.trimble.com/favicon.svg',
+          height: 24,
+        },
+      };
+      element.profileMenuOptions = {
+        avatarUrl: 'https://avatar.example.com/broken-image-link.png',
+        email: 'modus_user@trimble.com',
+        initials: 'MU',
+        signOutText: 'Sign out',
+        username: 'Modus User',
+      };
+
+      element.addEventListener('mainMenuClick', () => {
+        setSideNavExpanded((prev) => !prev);
+      });
     }
   }, []);
 
@@ -1026,9 +1060,159 @@ const MyComponent: React.FC = () => {
   };
 
   return (
-    <div id="dataTemplate">
+    <div id="dataTemplate" style={{ height: '100vh', overflow: 'auto' }}>
+      <div style={{ width: '100%', alignItems: 'center', height: '56px', boxShadow: '0 0 2px var(--modus-secondary) !important', marginTop: '50px' }}>
+        <ModusNavbar id="navbar6" ref={navbarRef} showAppsMenu showHelp showMainMenu showNotifications />
+      </div>
       <div id="container" style={{ display: 'flex', minHeight: '500px', overflowY: 'auto', position: 'relative', boxShadow: '0 0 2px var(--modus-secondary)!important' }}>
-        <ModusSideNavigation ref={sideNavRef} maxWidth="300px" targetContent="#dataTemplate #panelcontent" mode="push" collapseOnClickOutside={true} />
+        <ModusSideNavigation ref={sideNavRef} maxWidth="300px" targetContent="#dataTemplate #panelcontent" mode="push" collapseOnClickOutside={true} expanded={sideNavExpanded} />
+
+        <div id="panelcontent" style={{ padding: '10px', transition: 'all 0.25s linear 0s' }}>
+          <div id="overview">
+            <p>
+              The side navigation of an application provides context through accessible menu options and positions a consistent
+              component to connect to various pages in the application.
+            </p>
+            <p>
+              The side navigation is a collapsible side content of the site’s pages. It is located alongside the page’s primary
+              content. The component is designed to add side content to a fullscreen application. It is activated through the
+              “hamburger” menu in the Navbar.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+## Prompt 2
+**User Question:** Create a webpage with a side navigation that has nested menu items, including Home, Usage, Styles, and Accessibility pages. Include a navbar with main menu integration, and add switches to toggle between blue and default themes and between overlay and push modes.
+
+**Agent Answer:**
+References:
+Analyzing the requirements, we need to create a complex side navigation with nested menu structure and theme customization. The solution uses ModusNavbar, ModusSideNavigation, and ModusSwitch components working together. The side navigation includes multi-level nesting (up to 3 levels deep) with Home, Usage, Styles, and Accessibility sections. The navbar is configured with a logo and profile details. Two switches provide user control: one toggles between default and blue themes by applying CSS variables for colors and icons, while the other switches between "push" and "overlay" modes affecting how the content panel behaves when the navigation opens. The side navigation is toggled via the navbar's hamburger menu, and selection events update the main content area with the selected menu item's title.
+
+```tsx
+import React, { useEffect, useRef } from 'react';
+import { ModusNavbar, ModusSideNavigation, ModusSwitch } from '@trimble-oss/modus-react-components';
+
+const MyComponent: React.FC = () => {
+  const navbarRef = useRef<any>(null);
+  const sideNavRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (navbarRef.current) {
+      const element = navbarRef.current;
+      element.logoOptions = {
+        primary: {
+          url: 'https://modus.trimble.com/img/trimble-logo.svg',
+        },
+      };
+      element.profileMenuOptions = {
+        avatarUrl: 'https://avatar.example.com/broken-image-link.png',
+        email: 'modus_user@trimble.com',
+        initials: 'MU',
+        username: 'Modus User',
+      };
+    }
+
+    if (sideNavRef.current) {
+      const sidenav = sideNavRef.current;
+      sidenav.data = [
+        {
+          id: 'home-menu',
+          menuIcon: 'home',
+          label: 'Home page 1',
+          children: [
+            {
+              id: 'home-menu-2',
+              menuIcon: 'home',
+              label: 'Home page 2',
+              onSideNavItemClicked: selectionHandler,
+            },
+            {
+              id: 'usage-menu-2',
+              children: [
+                {
+                  id: 'home-menu-3',
+                  menuIcon: 'home',
+                  label: 'Home page 3',
+                  onSideNavItemClicked: selectionHandler,
+                },
+              ],
+              menuIcon: 'flowchart',
+              label: 'Usage page 2',
+            },
+          ],
+        },
+        {
+          id: 'usage-menu',
+          menuIcon: 'flowchart',
+          label: 'Usage page 1',
+          onSideNavItemClicked: selectionHandler,
+        },
+        {
+          id: 'styles-menu',
+          menuIcon: 'bar_graph_line',
+          label: 'Styles page 1',
+          onSideNavItemClicked: selectionHandler,
+        },
+        {
+          id: 'accessibility-menu',
+          menuIcon: 'screen',
+          label: 'Accessibility page 1',
+          onSideNavItemClicked: selectionHandler,
+        },
+      ];
+    }
+
+    const blueTheme = `--modus-side-navigation-link-color:#ffffff;--modus-side-navigation-bg:#0e416c;--modus-side-navigation-item-color:#ffffff;--modus-side-navigation-item-active-bg:#217cbb;--modus-side-navigation-item-hover-bg:#0063a3;--modus-side-navigation-item-icon-color:#ffffff;--modus-side-navigation-item-chevron-color:#ffffff;--modus-side-navigation-item-icon-filter:invert(100%) sepia(0%) saturate(24%) hue-rotate(114deg) brightness(108%) contrast(108%);`;
+
+    const switchTheme = document.querySelector('#switch-theme') as HTMLElement;
+    const switchMode = document.querySelector('#switch-mode') as HTMLElement;
+
+    switchTheme.addEventListener('switchClick', (e: any) => {
+      const sidenav = sideNavRef.current;
+      if (e.detail) {
+        sidenav.style = blueTheme;
+      } else sidenav.style = '';
+    });
+
+    switchMode.addEventListener('switchClick', (e: any) => {
+      const sidenav = sideNavRef.current;
+      sidenav.mode = sidenav.mode === 'push' ? 'overlay' : 'push';
+    });
+
+    document.addEventListener('mainMenuClick', (e: any) => {
+      const panel = sideNavRef.current;
+      panel.expanded = !panel.expanded;
+    });
+  }, []);
+
+  const selectionHandler = (e: any) => {
+    if (e.detail) {
+      const panel = document.querySelector('#panelcontent');
+      document.querySelector('#sidenav-content-title')?.remove();
+      const el = document.createElement('h3');
+      el.id = 'sidenav-content-title';
+      el.innerHTML = e.target?.label || 'Home page';
+      panel?.insertBefore(el, document.querySelector('#overview'));
+    }
+  };
+
+  return (
+    <div id="dataTemplate" style={{ height: '100vh', overflow: 'auto' }}>
+      <ModusSwitch id="switch-theme" label="Enable blue theme" />
+      <br />
+      <ModusSwitch id="switch-mode" label="Enable Push Side Navigation" />
+      <div style={{ width: '100%', alignItems: 'center', height: '56px', boxShadow: '0 0 2px var(--modus-secondary)!important', marginTop: '10px' }}>
+        <ModusNavbar id="navbar7" ref={navbarRef} showAppsMenu showHelp showMainMenu showNotifications />
+      </div>
+
+      <div id="container" style={{ display: 'flex', minHeight: '500px', overflowY: 'auto', position: 'relative', boxShadow: '0 0 2px var(--modus-secondary)!important' }}>
+        <ModusSideNavigation ref={sideNavRef} maxWidth="300px" id="sideNav" targetContent="#dataTemplate #panelcontent" mode="overlay" />
 
         <div id="panelcontent" style={{ padding: '10px', transition: 'all 0.25s linear 0s' }}>
           <div id="overview">
@@ -1353,6 +1537,56 @@ const MyComponent: React.FC = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+export default MyComponent;
+```
+
+# <ModusTabs>
+
+## Prompt 1
+**User Question:** Create a webpage with a ModusTabs component that has 4 tabs: "Home" with a left icon "home", "Profile" with a right icon "user", "Settings" as the active tab, and an icon-only tab with the icon "gear". The tabs should be full-width and have an aria-label "Main Navigation".
+
+**Agent Answer:**
+References:
+Analyzing the requirements from the prompt, we need to create a ModusTabs component with 4 tabs. The first tab should have a label "Home" and a left icon "home". The second tab should have a label "Profile" and a right icon "user". The third tab should be labeled "Settings" and be the active tab. The fourth tab should be icon-only with the icon "gear". Additionally, the tabs should be full-width and have an aria-label "Main Navigation".
+
+```tsx
+import React, { useEffect, useRef } from 'react';
+import { ModusTabs } from '@trimble-oss/modus-react-components';
+
+const MyComponent: React.FC = () => {
+  const modusTabsRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (modusTabsRef.current) {
+      modusTabsRef.current.tabs = [
+        {
+          id: 0,
+          label: 'Home',
+          leftIcon: 'home',
+        },
+        {
+          id: 1,
+          label: 'Profile',
+          rightIcon: 'user',
+        },
+        {
+          id: 2,
+          label: 'Settings',
+          active: true,
+        },
+        {
+          id: 3,
+          iconOnly: 'gear',
+        },
+      ];
+    }
+  }, []);
+
+  return (
+    <ModusTabs ref={modusTabsRef} fullWidth={true} ariaLabel="Main Navigation"></ModusTabs>
   );
 };
 

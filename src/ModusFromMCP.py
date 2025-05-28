@@ -108,6 +108,32 @@ def get_knowledge_base():
         print(f"Error loading knowledge base: {e}")
         return None
 
+# Tool 4: Get icons by character prefix
+@mcp.tool()
+def get_modus_icons_by_char(char_prefix: str = ""):
+    """Get Modus icon names that start with the specified character prefix"""
+    try:
+        if char_prefix:
+            icons = registry.get_icon_names_by_char(char_prefix)
+            return {
+                "success": True, 
+                "char_prefix": char_prefix,
+                "icon_count": len(icons),
+                "icons": icons
+            }
+        else:
+            # If no prefix is provided, return all icons
+            icons = registry.get_all_icon_names()
+            return {
+                "success": True, 
+                "message": "Returning all icons (no prefix specified)",
+                "icon_count": len(icons),
+                "icons": icons
+            }
+    except Exception as e:
+        print(f"Error in get_modus_icons_by_char: {str(e)}")
+        return {"success": False, "error": str(e)}
+
 # Start the server when this module is run directly
 if __name__ == "__main__":
     print("Starting Modus Components MCP Server on http://localhost:3001")
@@ -115,6 +141,7 @@ if __name__ == "__main__":
     print("- getting_started_installation_and_guidelines")
     print("- get_list_of_all_modus_components")
     print("- get_component_details")
+    print("- get_modus_icons_by_char")
     try:
         mcp.run(transport="sse")
     except Exception as e:

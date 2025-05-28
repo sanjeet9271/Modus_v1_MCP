@@ -2318,6 +2318,45 @@
         ],
         "componentName": "ModusSwitch"
       },
+      "ModusTabs":{
+        "description": "Tabs component for organizing content into multiple tabbed sections",
+        "properties": [
+          {
+            "name": "tabs",
+            "type": "any",
+            "description": "The tabs' tabs",
+            "default": "undefined",
+            "required": true
+          },
+          {
+            "name": "ariaLabel",
+            "type": "string",
+            "description": "The tabs' ariaLabel",
+            "default": "undefined"
+          },
+          {
+            "name": "size",
+            "type": "string",
+            "description": "The tabs' size",
+            "options": ["medium", "small"],
+            "default": "medium"
+          },
+          {
+            "name": "full-width",
+            "type": "boolean",
+            "description": "The tabs' width",
+            "default": "false"
+          }
+        ],
+        "events": [
+          {
+            "name": "tabChange",
+            "description": "Fires on tab change",
+            "emits": "The current tab"
+          }
+        ],
+        "componentName": "ModusTabs"
+      },
       "ModusTable": {
         "description": "Data table component with advanced features including sorting, pagination, filtering, and inline editing",
         "interfaces": [
