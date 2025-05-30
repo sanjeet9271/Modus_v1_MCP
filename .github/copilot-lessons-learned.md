@@ -43,10 +43,11 @@ A concise reference for GitHub Copilot to avoid common mistakes with Modus compo
 5. Setting wrong button types (use "button" not "submit" with event listeners)
 6. Implementing SideNavigation in individual pages instead of Layout
 7. Using wrong event name for hamburger menu toggle
-8. Using HTML elements (like buttons, inputs) instead of equivalent Modus components
+8. **CRITICAL: ALWAYS use ModusButton instead of HTML button elements** for any buttons in the interface
 9. Not providing component implementation reviews after completing each section
+10. **Don't Hallucinate and write `ModusAccordion.Item` instead of `ModusAccordionItem`**
 
-## Best Practice Example
+## Best Practice Examples
 ```tsx
 // Button with native event
 const btnRef = useRef<any>(null);
@@ -56,6 +57,45 @@ useEffect(() => {
     return () => btnRef.current?.removeEventListener('buttonClick', handler);
   }
 }, []);
+```
+
+```jsx
+// ModusTabs with proper property naming and event handling
+const ModusTabsExample = () => {
+  const [activeTab, setActiveTab] = useState('tab1');
+  const tabsRef = useRef(null);
+  
+  // Tab change handler
+  const handleTabChange = (e) => {
+    if (e && e.detail) {
+      // Access the tab id directly from e.detail
+      setActiveTab(e.detail);
+    }
+  };
+  
+  // Set up event listener without dependencies to prevent unnecessary re-renders
+  useEffect(() => {
+    const tabsElement = tabsRef.current;
+    if (tabsElement) {
+      tabsElement.addEventListener('tabChange', handleTabChange);
+    }
+    
+    return () => {
+      if (tabsElement) {
+        tabsElement.removeEventListener('tabChange', handleTabChange);
+      }
+    };
+  }, []); // Empty dependency array
+  
+  return (
+    <ModusTabs
+      ref={tabsRef}
+      tabs={tabs}
+      ariaLabel="Example Tabs"
+      fullWidth={true} // NOT full-width
+    />
+  );
+};
 ```
 
 ## Implementation Reviews and Component Priority
@@ -79,3 +119,14 @@ useEffect(() => {
    - HTML tabs → `ModusAccordion` or custom tabs with Modus styling
 
 4. **Component testing**: Always use Browser MCP to test that components render properly and maintain proper alignment and width.
+
+5. **Modus Icons Usage**:
+   - **ALWAYS verify icon names**: Use the `f1e_get_modus_icons_by_char` tool to confirm that the icon name exists before using it.
+   - **Common mistakes to avoid**: 
+     - Using `user` instead of `person` for user/profile icons
+     - Using `contact` instead of `contacts` for contacts icon
+     - Using icons without verifying they exist in the Modus icon library
+
+6. **Navbar Variant Logos**:
+   - Blue variant needs white logo: `https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg`
+   - Default variant needs dark logo: `https://modus.trimble.com/img/trimble-logo.svg`

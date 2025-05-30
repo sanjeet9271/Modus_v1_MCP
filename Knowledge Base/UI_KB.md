@@ -60,41 +60,33 @@ export default MyComponent;
 # <ModusAlert>
 
 ## Prompt 1
-**User Question:** Create a webpage with a dismissible error alert that logs a message to the console when dismissed.
+**User Question:** Create a webpage with various alert types including default info, dismissible, action button, error, success, warning, and info with a link.
 
-**Agent Answer:** 
+**Agent Answer:**
 References:
-The alert is created using the `<ModusAlert>` component with the `dismissible` and `type="error"` properties. An event listener is added to the dismiss button to log a message to the console when the alert is dismissed.
+To create a webpage with various alert types, we will use the `ModusAlert` component from the Modus design system. We'll display seven different alert variations: a default info alert, a dismissible alert, an alert with an action button, an error alert, a success alert, a warning alert, and an info alert with a link. The alerts will be stacked vertically with proper spacing between them.
 
-**code**:
 ```tsx
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { ModusAlert } from '@trimble-oss/modus-react-components';
 
-const MyComponent: React.FC = () => {
-  const alertRef = useRef<HTMLModusAlertElement>(null);
-
-  useEffect(() => {
-    const alertElement = alertRef.current;
-    if (alertElement) {
-      const handleDismiss = () => {
-        console.log('Alert dismissed');
-      };
-      alertElement.addEventListener('dismiss', handleDismiss);
-      return () => {
-        alertElement.removeEventListener('dismiss', handleDismiss);
-      };
-    }
-  }, []);
-
+const AlertExamples: React.FC = () => {
   return (
-    <div id="alert-container" style={{ padding: '16px' }}>
-      <ModusAlert ref={alertRef} message="An error occurred" type="error" dismissible></ModusAlert>
+    <div id="alert-container" style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '16px' }}>
+      <ModusAlert message="Info alert (default)" />
+      <ModusAlert dismissible message="Dismissible alert" />
+      <ModusAlert message="Info alert with action button" buttonText="Action" />
+      <ModusAlert message="Error alert" type="error" />
+      <ModusAlert message="Success alert" type="success" />
+      <ModusAlert message="Warning alert" type="warning" />
+      <ModusAlert type="info">
+        This is a info alert with <a href="#">an example link</a>
+      </ModusAlert>
     </div>
   );
 };
 
-export default MyComponent;
+export default AlertExamples;
 ```
 
 # <ModusBadge>
@@ -193,7 +185,7 @@ export default MyComponent;
 
 # <ModusButton>
 
-## Prompt 3
+## Prompt 1
 **User Question:** Create a webpage with a disabled primary button that shows a loading spinner, a borderless secondary button, and an outline tertiary button.
 
 **Agent Answer:**
@@ -277,111 +269,286 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-
 # <ModusTreeView>
 
 ## Prompt 1
 
-**User Question:** Create a webpage with a tree view that has a search input to filter the tree items. The tree should have the following structure: "Inbox" with sub-items "Personal" and "More ...", and "Archived" with sub-items "Folder1" containing "File1" and "File2". The search input should filter the tree items based on the text entered.
+**User Question:** Create a webpage with a tree view that shows an email folder structure. Include main folders for "Inbox" (with sub-folders "Personal", "Work", "Social", and "More..."), "Archived" (with nested folders containing files), and "Spam". Make sure the tree view has a width of 400px and doesn't allow multiple selections.
 
 **Agent Answer:**
 References:
-To create a tree view with a search input to filter the tree items, we need to use the `<ModusTreeView>` and `<ModusTextInput>` components. The tree structure includes "Inbox" with sub-items "Personal" and "More ...", and "Archived" with sub-items "Folder1" containing "File1" and "File2". The search input will filter the tree items based on the text entered. The approach involves setting up the tree structure, managing the filter text state, and updating the display of tree items based on the filter text.
+To create a tree view with an email folder structure, we'll use the `<ModusTreeView>` component with nested `<ModusTreeViewItem>` components to represent the hierarchical structure. The tree will have a width of 400px and will be configured to not allow multiple selections or checkbox selections. We'll create a main container with appropriate styling for the component.
 
 ```tsx
-import React, { useEffect, useRef, useState } from 'react';
-import { ModusTreeView, ModusTreeViewItem, ModusTextInput } from '@trimble-oss/modus-react-components';
+import React from 'react';
+import { ModusTreeView, ModusTreeViewItem } from '@trimble-oss/modus-react-components';
 
 const MyComponent: React.FC = () => {
-  const [filterText, setFilterText] = useState<string>('');
-  const [items, setItems] = useState<Map<string, string>>(new Map());
-  const treeViewRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = treeViewRef.current;
-    const root = container?.querySelector('modus-tree-view');
-
-    const itemMap = new Map();
-    container?.querySelectorAll('modus-tree-view-item').forEach((element) => {
-      const nodeId = element.getAttribute('node-id') || '';
-      const label = element.querySelector("div[slot='label']")?.innerHTML || '';
-      itemMap.set(nodeId, label);
-    });
-    setItems(itemMap);
-    if (root) {
-      root.expandedItems = Array.from(itemMap.keys());
-    }
-  }, []);
-
-  useEffect(() => {
-    const container = treeViewRef.current;
-
-    if (filterText) {
-      const searchResult = [...items]
-        .filter(([key, value]) => value.toLowerCase().includes(filterText.toLowerCase()))
-        .map(([key]) => key);
-
-      const getParents = (element: HTMLElement): HTMLElement[] => {
-        const parent = element.parentElement?.closest('modus-tree-view-item');
-        return parent ? [parent, ...getParents(parent)] : [];
-      };
-
-      items.forEach((value, key) => {
-        const element = container?.querySelector(`modus-tree-view-item[node-id='${key}']`);
-        if (element) {
-          if (searchResult.includes(key)) {
-            element.querySelector("div[slot='label']")!.style.color = '#0063a3';
-            element.style.display = 'block';
-            getParents(element).forEach((parent) => {
-              parent.style.display = 'block';
-            });
-          } else {
-            element.querySelector("div[slot='label']")!.style.color = '';
-            element.style.display = 'none';
-          }
-        }
-      });
-    } else {
-      items.forEach((value, key) => {
-        const element = container?.querySelector(`modus-tree-view-item[node-id='${key}']`);
-        if (element) {
-          element.querySelector("div[slot='label']")!.style.color = '';
-          element.style.display = 'block';
-        }
-      });
-    }
-  }, [filterText, items]);
-
   return (
-    <div id="tree-with-filter" style={{ display: 'flex', flexDirection: 'column', width: '400px' }} ref={treeViewRef}>
-      <ModusTextInput
-        id="filter"
-        size="large"
-        placeholder="Search"
-        disabled={false}
-        includeSearchIcon
-        onValueChange={(e) => setFilterText(e.detail)}
-      />
-      <ModusTreeView>
-        <ModusTreeViewItem nodeId="1">
-          <div slot="label">Inbox</div>
-          <ModusTreeViewItem nodeId="2">
-            <div slot="label">Personal</div>
-          </ModusTreeViewItem>
-          <ModusTreeViewItem nodeId="5">
-            <div slot="label">More ...</div>
+    <div id="tree-view-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', padding: '16px', overflow: 'auto' }}>
+      <ModusTreeView style={{ width: '400px' }} checkboxSelection={false} multiCheckboxSelection={false} multiSelection={false}>
+        <ModusTreeViewItem nodeId="1" label="Inbox">
+          <ModusTreeViewItem nodeId="2" label="Personal" />
+          <ModusTreeViewItem nodeId="3" label="Work" />
+          <ModusTreeViewItem nodeId="4" label="Social" />
+          <ModusTreeViewItem nodeId="5" label="More ..." />
+        </ModusTreeViewItem>
+        <ModusTreeViewItem nodeId="6" label="Archived">
+          <ModusTreeViewItem nodeId="7" label="Folder1">
+            <ModusTreeViewItem nodeId="8" label="File1" />
+            <ModusTreeViewItem nodeId="9" label="Folder2">
+              <ModusTreeViewItem nodeId="10" label="File2" />
+            </ModusTreeViewItem>
+            <ModusTreeViewItem nodeId="11" label="File3" />
           </ModusTreeViewItem>
         </ModusTreeViewItem>
-        <ModusTreeViewItem nodeId="6">
-          <div slot="label">Archived</div>
-          <ModusTreeViewItem nodeId="7" isLastChild>
-            <div slot="label">Folder1</div>
-            <ModusTreeViewItem nodeId="8">
-              <div slot="label">File1</div>
-            </ModusTreeViewItem>
-            <ModusTreeViewItem nodeId="11" isLastChild>
-              <div slot="label">File2</div>
-            </ModusTreeViewItem>
+        <ModusTreeViewItem nodeId="12" label="Spam" />
+      </ModusTreeView>
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+## Prompt 2
+
+**User Question:** Create a webpage with a tree view that displays an email folder structure with an icon for the Inbox folder. The tree should include an "Inbox" with sub-folders "Personal", "Work", "Social", and "More..." as the last child item.
+
+**Agent Answer:**
+References:
+To create a tree view with an email folder structure that includes icons, we'll use the `<ModusTreeView>` component with nested `<ModusTreeViewItem>` components. The tree will have a width of 400px and will display an inbox icon for the main folder. We'll set up the structure with "Inbox" as the parent folder containing sub-folders "Personal", "Work", "Social", and "More..." with the last one marked as the last child using the `isLastChild` property.
+
+```tsx
+import React from 'react';
+import { ModusTreeView, ModusTreeViewItem } from '@trimble-oss/modus-react-components';
+
+const MyComponent: React.FC = () => {
+  return (
+    <div id="tree-view-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', padding: '16px', overflow: 'auto' }}>
+      <ModusTreeView style={{ width: '400px' }}>
+        <ModusTreeViewItem nodeId="1" label="Inbox">
+          <svg slot="itemIcon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="16" width="16" viewBox="0 0 32 32">
+            <path d="M28.79 12.39A1 1 0 0 0 28 12h-2V9c0-.55-.45-1-1-1h-9.59l-1.7-1.71C13.52 6.11 13.27 6 13 6H4c-.55 0-1 .45-1 1v17c0 .04.02.07.02.11.01.05.02.11.04.16.02.09.06.17.1.25.02.03.02.06.05.09.01.01.03.02.04.03.07.08.15.14.23.19.04.03.06.05.1.07.13.06.27.1.42.1h21c.13 0 .25-.03.36-.07.04-.02.07-.04.1-.06.07-.04.14-.08.2-.13.03-.03.06-.06.09-.1.05-.05.09-.11.12-.18a.31.31 0 0 0 .06-.13c.01-.02.03-.04.03-.07l3-11c.09-.3.02-.62-.17-.87zM5 8h7.59l1.7 1.71c.19.18.44.29.71.29h9v2H7c-.45 0-.85.3-.96.74L5 16.53V8z"></path>
+          </svg>
+          <ModusTreeViewItem nodeId="2" label="Personal" />
+          <ModusTreeViewItem nodeId="3" label="Work" />
+          <ModusTreeViewItem nodeId="4" label="Social" />
+          <ModusTreeViewItem nodeId="5" label="More ..." isLastChild={true} />
+        </ModusTreeViewItem>
+      </ModusTreeView>
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+## Prompt 3
+
+**User Question:** Create a tree view with an action bar that allows users to add, remove, edit, copy, expand, collapse, and enable drag-and-drop functionality for tree nodes. The tree should display an email folder structure with "Inbox" (containing "Personal", "Work", "Social", and "More...") and "Archived" (with "Folder1" containing "File1" and "File3").
+
+**Agent Answer:**
+References:
+To create a tree view with an action bar that provides comprehensive node management functionality, we'll use the `<ModusTreeView>` and `<ModusButton>` components. The action bar includes buttons for adding, removing, editing, copying, expanding/collapsing all items, and enabling drag-and-drop functionality. Each button has appropriate icon SVGs and initially starts disabled. The tree view displays an email folder structure with "Inbox" and "Archived" folders and their respective nested items. The implementation uses event listeners to manage button state based on selected items and implement the functionality for each action button.
+
+```tsx
+import React, { useEffect } from 'react';
+import { ModusButton, ModusTreeView, ModusTreeViewItem } from '@trimble-oss/modus-react-components';
+
+const MyComponent: React.FC = () => {
+  useEffect(() => {
+    const container = document.querySelector("div[id='tree-with-action-bar']");
+    const root = container?.querySelector('modus-tree-view') as any;
+    const addButton = container?.querySelector("modus-button[id='add']") as any;
+    const removeButton = container?.querySelector("modus-button[id='remove']") as any;
+    const editButton = container?.querySelector("modus-button[id='edit']") as any;
+    const copyButton = container?.querySelector("modus-button[id='copy']") as any;
+    const expandAllButton = container?.querySelector("modus-button[id='expand']") as any;
+    const collapseAllButton = container?.querySelector("modus-button[id='collapse']") as any;
+    const dragButton = container?.querySelector("modus-button[id='drag']") as any;
+
+    const disableButtons = (disable: boolean) => {
+      removeButton.disabled = disable;
+      copyButton.disabled = disable;
+      editButton.disabled = disable;
+    };
+
+    const getChildren = (element: any) => {
+      const children = element.querySelectorAll('modus-tree-view-item');
+      if (!children) return [];
+      return Array.from(children).reduce((r, c) => {
+        r.push(c, ...getChildren(c));
+        return r;
+      }, []);
+    };
+
+    const getItems = () =>
+      new Map(
+        Array.from(root.querySelectorAll('modus-tree-view-item')).map((i: any) => [
+          i.nodeId,
+          i.label,
+        ])
+      );
+
+    const querySelect = (itemId: string) =>
+      container?.querySelector("modus-tree-view-item[node-id='" + itemId + "']");
+
+    addButton.disabled = false;
+    expandAllButton.disabled = false;
+    collapseAllButton.disabled = false;
+
+    container?.addEventListener('itemClick', () => {
+      if (root.selectedItems.length > 0) {
+        disableButtons(false);
+      } else {
+        disableButtons(true);
+      }
+    });
+
+    addButton?.addEventListener('buttonClick', () => {
+      const nodeId =
+        container?.querySelectorAll('modus-tree-view-item').length + 1;
+      const selectedItems = root.selectedItems;
+      if (nodeId) {
+        const selectedItemId =
+          selectedItems && selectedItems.length > 0 ? selectedItems[0] : null;
+        const selectedItemElement = querySelect(selectedItemId);
+        const selectedItemParent = selectedItemElement?.parentElement;
+        const newNode = document.createElement('modus-tree-view-item');
+        newNode.nodeId = nodeId;
+        newNode.editable = true;
+        const insertParent = selectedItemParent || root;
+        const insertBeforeElement =
+          selectedItemElement || root.firstElementChild;
+        insertParent.insertBefore(newNode, insertBeforeElement);
+      }
+    });
+
+    removeButton?.addEventListener('buttonClick', () => {
+      const selectedItems = root.selectedItems;
+      selectedItems?.forEach((i: any) => {
+        const selectedItemElement = querySelect(i);
+        const selectedItemParent = selectedItemElement?.parentElement;
+        if (selectedItemElement) {
+          selectedItemParent.removeChild(selectedItemElement);
+        }
+      });
+
+      if (!Array.from(getItems()).length) {
+        container
+          ?.querySelectorAll('modus-button')
+          .forEach((b: any) => (b.disabled = true));
+      } else disableButtons(true);
+    });
+
+    editButton?.addEventListener('buttonClick', () => {
+      const selectedItems = root.selectedItems;
+      const selectedItemId =
+        selectedItems && selectedItems.length > 0 ? selectedItems[0] : null;
+      const selectedItemElement = querySelect(selectedItemId);
+      selectedItemElement.editable = true;
+    });
+
+    copyButton?.addEventListener('buttonClick', () => {
+      const nodeId =
+        container?.querySelectorAll('modus-tree-view-item').length + 1;
+      const selectedItems = root.selectedItems;
+      const selectedItemId =
+        selectedItems && selectedItems.length > 0 ? selectedItems[0] : null;
+      const selectedItemElement = querySelect(selectedItemId);
+      if (selectedItemElement) {
+        const newNode = selectedItemElement.cloneNode(true) as any;
+        newNode.nodeId = nodeId;
+        newNode.editable = true;
+        newNode.label = 'Copy of ' + selectedItemElement.label;
+
+        let count = nodeId + 1;
+        getChildren(newNode).forEach((c: any) => {
+          c.nodeId = count;
+          count++;
+        });
+
+        (selectedItemElement.parentElement || root).insertBefore(
+          newNode,
+          selectedItemElement
+        );
+      }
+    });
+
+    expandAllButton?.addEventListener('buttonClick', () => {
+      root.expandedItems = Array.from(getItems().keys());
+      expandAllButton.style.display = 'none';
+      collapseAllButton.style.display = 'inline-block';
+    });
+
+    collapseAllButton?.addEventListener('buttonClick', () => {
+      root.expandedItems = [];
+      collapseAllButton.style.display = 'none';
+      expandAllButton.style.display = 'inline-block';
+    });
+
+    dragButton?.addEventListener('buttonClick', () => {
+      root.enableReordering = !root.enableReordering;
+    });
+  }, []);
+
+  return (
+    <div id="tree-with-action-bar" style={{ display: 'flex', flexDirection: 'column', width: '400px' }}>
+      <div style={{ display: 'flex', justifyContent: 'end', flexWrap: 'wrap', marginTop: '1rem' }}>
+        <ModusButton buttonStyle="borderless" ariaLabel="Add" title="Add" size="small" color="primary" disabled id="add">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0,0H24V24H0Z" fill="none" />
+            <path d="M19,13H13v6H11V13H5V11h6V5h2v6h6Z" fill="#252a2e" />
+          </svg>
+        </ModusButton>
+        <ModusButton buttonStyle="borderless" ariaLabel="Remove" title="Remove" size="small" color="primary" disabled id="remove">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0,0H24V24H0Z" fill="none" />
+            <path d="M6,19a2.006,2.006,0,0,0,2,2h8a2.006,2.006,0,0,0,2-2V7H6ZM19,4H15.5l-1-1h-5l-1,1H5V6H19Z" fill="#252a2e" />
+          </svg>
+        </ModusButton>
+        <ModusButton buttonStyle="borderless" size="small" ariaLabel="Edit" title="Edit" color="primary" disabled id="edit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0,0H24V24H0Z" fill="none" />
+            <path d="M3,17.25V21H6.75L17.81,9.94,14.06,6.19ZM20.71,7.04a1,1,0,0,0,0-1.41L18.37,3.29a1,1,0,0,0-1.41,0L15.13,5.12l3.75,3.75,1.83-1.83Z" fill="#252a2e" />
+          </svg>
+        </ModusButton>
+        <ModusButton buttonStyle="borderless" size="small" ariaLabel="Copy" title="Copy" color="primary" disabled id="copy">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0,0H24V24H0Z" fill="none" />
+            <path d="M16,1H4A2.006,2.006,0,0,0,2,3V17H4V3H16Zm3,4H8A2.006,2.006,0,0,0,6,7V21a2.006,2.006,0,0,0,2,2H19a2.006,2.006,0,0,0,2-2V7A2.006,2.006,0,0,0,19,5Zm0,16H8V7H19Z" fill="#252a2e" />
+          </svg>
+        </ModusButton>
+        <ModusButton buttonStyle="borderless" size="small" ariaLabel="Drag" title="Drag" color="primary" disabled id="drag">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M11,18a2,2,0,1,1-2-2A2.006,2.006,0,0,1,11,18ZM9,10a2,2,0,1,0,2,2A2.006,2.006,0,0,0,9,10ZM9,4a2,2,0,1,0,2,2A2.006,2.006,0,0,0,9,4Zm6,4a2,2,0,1,0-2-2A2.006,2.006,0,0,0,15,8Zm0,2a2,2,0,1,0,2,2A2.006,2.006,0,0,0,15,10Zm0,6a2,2,0,1,0,2,2A2.006,2.006,0,0,0,15,16Z" fill="#252a2e" />
+          </svg>
+        </ModusButton>
+        <ModusButton buttonStyle="borderless" size="small" ariaLabel="Expand" title="Expand" color="primary" disabled id="expand">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0,0H24V24H0Z" fill="rgba(0,0,0,0)" />
+            <path d="M12,5.83,15.17,9l1.41-1.41L12,3,7.41,7.59,8.83,9Zm0,12.34L8.83,15,7.42,16.41,12,21l4.59-4.59L15.17,15Z" fill="#252a2e" />
+          </svg>
+        </ModusButton>
+        <ModusButton buttonStyle="borderless" size="small" ariaLabel="Collapse" title="Collapse" color="primary" disabled style={{ display: 'none' }} id="collapse">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0,0H24V24H0Z" fill="none" />
+            <path d="M7.41,18.59,8.83,20,12,16.83,15.17,20l1.41-1.41L12,14ZM16.59,5.41,15.17,4,12,7.17,8.83,4,7.41,5.41,12,10Z" fill="#252a2e" />
+          </svg>
+        </ModusButton>
+      </div>
+      <ModusTreeView>
+        <ModusTreeViewItem nodeId="1" label="Inbox">
+          <ModusTreeViewItem nodeId="2" label="Personal" />
+          <ModusTreeViewItem nodeId="3" label="Work" />
+          <ModusTreeViewItem nodeId="4" label="Social" />
+          <ModusTreeViewItem nodeId="5" label="More ..." />
+        </ModusTreeViewItem>
+        <ModusTreeViewItem nodeId="6" label="Archived">
+          <ModusTreeViewItem nodeId="7" isLastChild={true} label="Folder1">
+            <ModusTreeViewItem nodeId="8" label="File1" />
+            <ModusTreeViewItem nodeId="9" isLastChild={true} label="File3" />
           </ModusTreeViewItem>
         </ModusTreeViewItem>
       </ModusTreeView>
@@ -391,6 +558,9 @@ const MyComponent: React.FC = () => {
 
 export default MyComponent;
 ```
+    
+
+
 
 # <ModusDataTable>
 

@@ -1,6 +1,17 @@
 # Modus Project Instructions
 
 > **IMPORTANT:** Before providing any assistance, ALWAYS review the `copilot-lessons-learned.md` file to ensure you don't repeat past mistakes, especially regarding event handling and component implementations.
+> **Important**: Log and tell about each of the step you perform. Do not skip any step.
+     > Steps to be followed are following
+        1. Read and understand all the instructions carefully
+        2. Read and understand the `copilot-lessons-learned.md` file to avoid past mistakes.
+        3. Installation guidelines for `@trimble-oss/modus-react-components` library.
+        4. Planning and logging the project.
+        5. Iterative component implementation.
+        6. Review after completing each planning step.
+        7. Test using browser MCP.
+        8. For the task of fixing erros take help of your guidelines and `copilot-lessons-learned.md` lessons learned file.
+    
 
 **When working on a Modus project or generating components, strictly adhere to the following guidelines**:
 
@@ -9,6 +20,10 @@
 - **You're using Powershell terminal so avoid using `&&` command for concatenation of multiple commands.**
 - Work step by step, ensuring each component is correctly implemented before moving on to the next.
 - **Don't waste Time on fixing trivial typescript errors**. Focus on the functionality and correctness of the components.
+
+## Error Correction 
+1. If you get error while fetching a component details Check if you're using correct component name, list all components name.
+2. If the user is facing any issue first navigate to the project live ouput using browser MCP and get the console.errors then use ReACT prompting technique to figure out the error and then fix it after fixing do check if it's implemented correctly in Live app
 
 ### **Strict Adherence Process for Modus Projects:**
 
@@ -47,7 +62,7 @@
 10. **Sequential Process**: Follow the sequence: **Do not invent custom properties.** First, find the properties and usage examples before using a component.
 11. **Planning and Testing**: Follow an iterative approach; first create a component, then use your browser MCP to test it. If it is giving sufficient results, move to the next part of the plan. But first, write the plan.
 12. **Modular Design**: Structure your code modularly. Avoid making a single file too large and adhere to best coding practices.
-13. **Component-Specific Imports**: For components like `ModusList`, `ModusAccordion`, and `ModusTreeview`, ensure you import their corresponding `Item` and obtain their properties as well.
+13. **Component-Specific Imports**: For components like `ModusList`, `ModusAccordion`, and `ModusTreeview`, ensure you import their corresponding `Item` and obtain their properties as well.**ModusList -> ModusListItem`, `ModusAccordion -> ModusAccordionItem`, and `ModusTreeview -> ModusTreeviewItem`**
 14. **Navbar Variants**: For the Navbar, choose between the `blue` and `default` variants. Change the logo accordingly:
     -   Blue variant: `https://modus-bootstrap.trimble.com/img/trimble-logo-rev.svg`
     -   Default variant: `https://modus.trimble.com/img/trimble-logo.svg`
@@ -58,7 +73,12 @@
 18. **Alignment**: If you're using full width and there's a component, you must keep it in the center so that aesthetically it looks beautiful.
 19. **Modus ICON Names**: Before using any Modus Icon name, ensure to Use the `get_list_of_all_modus_icons` tool to fetch the list of available icons. **You can pass starting character to fetch list of all the icons available with that starting character or you can pass empty string to fetch all the icons.**
 
+## Guidelines after finishing a Modus Project
+1.  **Review Implementation**: Review the Implementation of each component for their properties and events handling. Generate a short summary of while doing so.
+2. **Rendering the Project** : Only if the project is not running then render the project. You can check youself or ask user for that.
 ---
+
+
 
 ## Best Practices Guide for Modus Projects
 
