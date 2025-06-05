@@ -41,10 +41,10 @@ def get_list_of_all_modus_components():
 
 # Tool 3: Get details for a specific component
 @mcp.tool()
-def get_component_details(component_name: str):
+def get_component_details(component_name: str, framework: str = None):
     """Get properties and usage examples for a specific Modus component"""
     try:
-        print(f"Fetching details for component: {component_name}")
+        print(f"Fetching details for component: {component_name} (Framework: {framework or 'React'})")
         
         # Get component properties from registry
         component_info = registry.get_component_properties_and_events(component_name)
@@ -54,11 +54,16 @@ def get_component_details(component_name: str):
             print(error_msg)
             return {"success": False, "error": error_msg}
         
-        # Get examples using the registry method
+        # Get examples using the registry method with framework-specific examples
         kb = get_knowledge_base()
         examples = []
         if kb and kb["content"]:
-            examples = registry._extract_kb_examples(kb["content"], component_name)
+            if framework and framework.lower() == "angular":
+                # Extract Angular-specific examples
+                examples = registry._extract_kb_examples(kb["content"], component_name, framework="angular")
+            else:
+                # Default to React examples
+                examples = registry._extract_kb_examples(kb["content"], component_name)
         
         result = {
             "success": True,
@@ -67,10 +72,11 @@ def get_component_details(component_name: str):
             "properties": component_info["properties"],
             "events": component_info["events"],
             "methods": component_info["methods"],
-            "examples": examples
+            "examples": examples,
+            "framework": framework or "React"
         }
         
-        print(f"Successfully fetched details for {component_name}")
+        print(f"Successfully fetched details for {component_name} ({framework or 'React'})")
         return result
     except Exception as e:
         print(f"Error in get_component_details: {str(e)}")
@@ -140,7 +146,7 @@ if __name__ == "__main__":
     print("Available tools:")
     print("- getting_started_installation_and_guidelines")
     print("- get_list_of_all_modus_components")
-    print("- get_component_details")
+    print("- get_component_details (optional parameter: framework='angular')")
     print("- get_modus_icons_by_char")
     try:
         mcp.run(transport="sse")

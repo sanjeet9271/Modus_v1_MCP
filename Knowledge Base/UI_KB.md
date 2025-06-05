@@ -1477,99 +1477,121 @@ export default MyComponent;
 ```
 
 # <ModusTable>
+Based on your request, I'll create a UserQuestion and AgentAnswer entry for the ModusTable component example, following the format in the UI_KB.md file.
+
+# <ModusTable>
 
 ## Prompt 1
-**User Question:** Create a webpage with a table that has 5 columns: "First Name", "Last Name", "Age", "Visits", and "Status", with row hover effect, sorting enabled, and a custom button in each row under a "Custom" column? The table should also be borderless.
+**User Question:** Create a detailed data table with columns for personal information including name, age, status, priority, and email. Include features like column resizing, sorting, pagination, row selection, and a toolbar with column visibility options. The table should also display summary rows with totals.
 
-**Agent Answer:**
+**Agent Answer:** 
 References:
-To create the table as per the requirements, we need to use the `<ModusTable>` component with the specified columns and properties. The table will have row hover effect, sorting enabled, and a custom button in each row under a "Custom" column. The table will also be borderless. The columns and data are defined in the `useEffect` hook to ensure they are set after the component mounts. The fullWidth should always be true so that it takes all the space properly
+To create a comprehensive data table with the specified features, I'll use the `ModusTable` component with various configuration options. The implementation includes:
 
+1. **Column Configuration**: I'm defining multiple columns with different data types (text, integer, badge, link, date) and setting specific properties for each:
+   - Setting width constraints with `size`, `minSize`, and `maxSize` properties for optimal display
+   - Enabling column totals with `showTotal` for numerical columns (age, visits, progress)
+   - Configuring editable cells with `cellEditable` and providing options through `cellEditorType` and `cellEditorArgs`
 
-```tsx
-import React, { useEffect, useRef } from 'react';
-import { ModusTable, ModusButton } from '@trimble-oss/modus-react-components';
+2. **Data Structure**: The table data includes multiple rows with structured information, including badge-type data for priorities and link-type data for emails.
+
+3. **Interactive Features**:
+   - `hover={true}` enables row highlighting on hover for better user experience
+
+```jsx
+import React, { useEffect, useState } from 'react';
+import { ModusTable } from '@trimble-oss/modus-react-components';
 
 const MyComponent: React.FC = () => {
-  const tableRef = useRef<HTMLModusTableElement>(null);
+  const [tableColumns, setTableColumns] = useState<any[]>([]);
+  const [tableData, setTableData] = useState<any[]>([]);
 
   useEffect(() => {
-    if (tableRef.current) {
-      tableRef.current.columns = [
-        {
-          header: 'First Name',
-          accessorKey: 'firstName',
-          id: 'first-name',
-          dataType: 'text',
-        },
-        {
-          header: 'Last Name',
-          accessorKey: 'lastName',
-          id: 'last-name',
-          dataType: 'text',
-        },
-        { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer' },
-        {
-          header: 'Visits',
-          accessorKey: 'visits',
-          id: 'visits',
-          dataType: 'integer',
-        },
-        { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text' },
-        {
-          header: 'Custom',
-          accessorKey: 'custom',
-          id: 'custom',
-          dataType: 'custom',
-        }
-      ];
+    setTableColumns([
+      { header: 'First Name', accessorKey: 'firstName', id: 'first-name', dataType: 'text', size: 150, minSize: 80 },
+      { header: 'Last Name', accessorKey: 'lastName', id: 'last-name', dataType: 'text', size: 150, minSize: 80 },
+      { header: 'Age', accessorKey: 'age', id: 'age', dataType: 'integer', size: 60, minSize: 60, showTotal: true },
+      { header: 'Visits', accessorKey: 'visits', id: 'visits', dataType: 'integer', maxSize: 80, minSize: 80, enableResizing: false, showTotal: true },
+      { header: 'Status', accessorKey: 'status', id: 'status', dataType: 'text', minSize: 80, cellEditable: true, cellEditorType: 'select', cellEditorArgs: { options: [{ display: 'Verified' }, { display: 'Pending' }, { display: 'Rejected' }] } },
+      { header: 'Priority', accessorKey: 'priority', id: 'priority', dataType: 'badge', cellEditable: true, cellEditorType: 'select', cellEditorArgs: { options: [{ size: 'medium', type: 'counter', display: 'High', color: 'success' }, { size: 'medium', type: 'counter', display: 'Low', color: 'danger' }, { size: 'medium', type: 'counter', display: 'Medium', color: 'warning' }] } },
+      { header: 'Email', accessorKey: 'email', id: 'email', dataType: 'link', size: 230, minSize: 80, cellEditable: true, cellEditorType: 'select', cellEditorArgs: { options: [{ display: 'Google', url: 'https://www.google.com' }, { display: 'Yahoo', url: 'https://www.yahoo.com' }, { display: 'Bing', url: 'https://www.bing.com' }] } },
+      { header: 'Profile Progress', accessorKey: 'progress', id: 'progress', dataType: 'integer', minSize: 100, showTotal: true },
+      { header: 'Created At', accessorKey: 'createdAt', id: 'createdAt', dataType: 'date', size: 210, minSize: 100 },
+    ]);
 
-      tableRef.current.data = [
-        {
-          firstName: 'Gordon',
-          lastName: 'Lemke',
-          age: 40,
-          visits: 434,
-          status: 'single',
-          custom: <ModusButton color='primary'>Custom1</ModusButton>
-        },
-        {
-          firstName: 'Elliott',
-          lastName: 'Bosco',
-          age: 21,
-          visits: 348,
-          status: 'complicated',
-          custom: <ModusButton color='secondary'>Custom2</ModusButton>
-        },
-        {
-          firstName: 'Agnes',
-          lastName: 'Breitenberg',
-          age: 34,
-          visits: 639,
-          status: 'single',
-          custom: <ModusButton color='tertiary'>Custom3</ModusButton>
-        },
-        {
-          firstName: 'Nicolette',
-          lastName: 'Stamm',
-          age: 13,
-          visits: 518,
-          status: 'relationship',
-          custom: <ModusButton color='danger'>Custom4</ModusButton>
-        },
-      ];
-    }
+    setTableData([
+      {
+        firstName: 'Alice',
+        lastName: 'Johnson',
+        age: 30,
+        visits: 120,
+        progress: 80,
+        status: 'Verified',
+        priority: { size: 'medium', type: 'counter', text: 'Medium', color: 'warning' },
+        email: { display: 'Google', url: 'https://www.google.com' },
+        createdAt: '2021-01-15T10:00:00.000Z',
+      },
+      {
+        firstName: 'Bob',
+        lastName: 'Smith',
+        age: 45,
+        visits: 200,
+        progress: 90,
+        status: 'Pending',
+        priority: { size: 'medium', type: 'counter', text: 'High', color: 'success' },
+        email: { display: 'Yahoo', url: 'https://www.yahoo.com' },
+        createdAt: '2020-05-20T14:30:00.000Z',
+      },
+      {
+        firstName: 'Charlie',
+        lastName: 'Brown',
+        age: 28,
+        visits: 150,
+        progress: 70,
+        status: 'Rejected',
+        priority: { size: 'medium', type: 'counter', text: 'Low', color: 'danger' },
+        email: { display: 'Bing', url: 'https://www.bing.com' },
+        createdAt: '2019-11-11T08:45:00.000Z',
+      },
+      {
+        firstName: 'Diana',
+        lastName: 'Prince',
+        age: 35,
+        visits: 180,
+        progress: 85,
+        status: 'Verified',
+        priority: { size: 'medium', type: 'counter', text: 'Critical', color: 'danger' },
+        email: { display: 'Google', url: 'https://www.google.com' },
+        createdAt: '2022-03-25T16:20:00.000Z',
+      },
+    ]);
   }, []);
 
   return (
-    <div style={{ width: '950px' }}>
-      <ModusTable ref={tableRef} hover={true} sort={true} displayOptions={{ borderless: true }} fullWidth={true} />
+    <div style={{ width: '950px', overflowX: 'auto' }}>
+      <ModusTable
+        id="table4"
+        columns={tableColumns}
+        data={tableData}
+        hover={true}
+        sort={true}
+        columnResize={true}
+        pagination={true}
+        showSortIconOnHover={true}
+        toolbar={true}
+        toolbarOptions={{ columnsVisibility: { title: 'Column Visibility', requiredColumns: ['first-name'], hiddenColumns: ['last-name'] } }}
+        summaryRow={true}
+        rowSelectionOptions={{ multiple: true, subRowSelection: true }}
+        rowSelectionDisabled={(row) => row.original.status === 'Rejected'}
+        fullWidth={true}
+      />
     </div>
   );
 };
 
 export default MyComponent;
 ```
+
 
 # <ModusToolbar>
 
@@ -1716,47 +1738,49 @@ export default MyComponent;
 # <ModusTabs>
 
 ## Prompt 1
-**User Question:** Create a webpage with a ModusTabs component that has 4 tabs: "Home" with a left icon "home", "Profile" with a right icon "user", "Settings" as the active tab, and an icon-only tab with the icon "gear". The tabs should be full-width and have an aria-label "Main Navigation".
+
+**User Question:** Create a tabs component that displays 5 tabs with some having icons, and show the active tab index when a user clicks on a different tab. Make sure to properly handle the tab change events.
 
 **Agent Answer:**
 References:
-Analyzing the requirements from the prompt, we need to create a ModusTabs component with 4 tabs. The first tab should have a label "Home" and a left icon "home". The second tab should have a label "Profile" and a right icon "user". The third tab should be labeled "Settings" and be the active tab. The fourth tab should be icon-only with the icon "gear". Additionally, the tabs should be full-width and have an aria-label "Main Navigation".
+To create a tabs component that displays 5 tabs with some having icons and shows the active tab index when a user clicks on a different tab, I'll use the `ModusTabs` component from the Modus React library. The solution involves using React's `useState` to track the active tab and `useRef` to access the tabs DOM element. The component will include proper event handling through an event listener for the `tabChange` event, which updates the active tab state whenever a user selects a different tab.
 
 ```tsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ModusTabs } from '@trimble-oss/modus-react-components';
 
 const MyComponent: React.FC = () => {
-  const modusTabsRef = useRef<any>(null);
+  const tabsRef = useRef<any>(null);
+  const [activeTab, setActiveTab] = useState(0);
+  const tabData = [
+    { id: 0, label: 'Tab 1', icon: 'sun' },
+    { id: 1, label: 'Tab 2' },
+    { id: 2, label: 'Tab 3', icon: 'moon' },
+    { id: 3, label: 'Tab 4' },
+    { id: 4, label: 'Tab 5', icon: 'sun' },
+  ];
 
   useEffect(() => {
-    if (modusTabsRef.current) {
-      modusTabsRef.current.tabs = [
-        {
-          id: 0,
-          label: 'Home',
-          leftIcon: 'home',
-        },
-        {
-          id: 1,
-          label: 'Profile',
-          rightIcon: 'user',
-        },
-        {
-          id: 2,
-          label: 'Settings',
-          active: true,
-        },
-        {
-          id: 3,
-          iconOnly: 'gear',
-        },
-      ];
+    const modusTabs = tabsRef.current?.querySelector('modus-tabs');
+    if (modusTabs) {
+      modusTabs.tabs = tabData.map(tab => ({
+        id: tab.id,
+        label: tab.label,
+        leftIcon: tab.icon,
+      }));
+      modusTabs.addEventListener('tabChange', (e: any) => {
+        setActiveTab(e.detail);
+      });
     }
   }, []);
 
   return (
-    <ModusTabs ref={modusTabsRef} fullWidth={true} ariaLabel="Main Navigation"></ModusTabs>
+    <div id="tabs-container2" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', padding: '16px', overflow: 'auto' }} ref={tabsRef}>
+      <ModusTabs></ModusTabs>
+      <div id="tab-content3" style={{ width: '80%', textAlign: 'center' }}>
+        <h1 id="tab-heading3">Tab Index: {activeTab}</h1>
+      </div>
+    </div>
   );
 };
 

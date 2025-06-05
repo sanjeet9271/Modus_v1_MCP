@@ -115,6 +115,7 @@
             "emits": "void"
           }
         ],
+        "Custom Instructions" : "This component should always be wrapped under <ModusDatePicker> for selecting date from calendar.",
         "componentName": "ModusDateInput"
       },
       "ModusSelect": {
@@ -715,6 +716,9 @@
           }
         ],
         "componentName": "ModusNumberInput"
+      },
+      "ModusDatePicker":{
+        "description": "Just a wrapper for ModusDateInput component to select date from calendar"
       }
     }
   }

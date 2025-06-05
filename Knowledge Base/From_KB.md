@@ -138,41 +138,8 @@ const MyComponent: React.FC = () => {
 
 export default MyComponent;
 ```
+
 ## Prompt 3
-**User Question:** Create a webpage with an autocomplete component that allows users to search for employees and display custom options with employee names and their roles?
-
-**Agent Answer:**
-References:
-To create an autocomplete component that allows users to search for employees and display custom options with employee names and their roles, we will use the `ModusAutocomplete` component with custom options defined within the component. The `ModusAutocomplete` component is styled to ensure proper alignment and spacing. The `clearable` attribute allows users to clear the input field.The `ModusAutocomplete` component is used with a label "Employee Search" and a placeholder "Search for an employee...". Custom options are provided within the component, each with a unique `data-id` and `data-search-value`. The options are styled to display the employee name in bold and their role in a smaller font size.
-
-```tsx
-import React from 'react';
-import { ModusAutocomplete } from '@trimble-oss/modus-react-components';
-
-const MyComponent: React.FC = () => {
-  return (
-    <div style={{ width: '500px', padding: '16px', overflow: 'auto' }}>
-      <ModusAutocomplete
-        label="Employee Search"
-        clearable
-        placeholder="Search for an employee..."
-      >
-        <li data-search-value="The Git Guru" data-id="1" style={{ padding: '8px' }}>
-          <div style={{ fontWeight: 'bold' }}>The Git Guru</div>
-          <div style={{ fontSize: '12px' }}>Lead DevOps Engineer</div>
-        </li>
-        <li data-search-value="Bob the Builder" data-id="2" style={{ padding: '8px' }}>
-          <div style={{ fontWeight: 'bold' }}>Bob the Builder</div>
-          <div style={{ fontSize: '12px' }}>Senior Construction Engineer</div>
-        </li>
-      </ModusAutocomplete>
-    </div>
-  );
-};
-
-export default MyComponent;
-```
-## Prompt 5
 
 **User Question:** Create a webpage with an autocomplete component that allows users to search for countries, includes a clear button, and displays an error message if no results are found?
 
@@ -279,73 +246,6 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-## Prompt 3
-**User Question:** Create a webpage with a small-sized checkbox labeled "Subscribe to Newsletter"?
-**Agent Answer:**
-References:
-To create a small-sized checkbox with the label "Subscribe to Newsletter", we use the `ModusCheckbox` component. The `size` property is set to "small" to achieve the desired size.
-
-```tsx
-import React from 'react';
-import { ModusCheckbox } from '@trimble-oss/modus-react-components';
-
-const MyComponent: React.FC = () => {
-  return (
-    <div id="checkbox-container" style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '16px', overflow: 'auto' }}>
-      <ModusCheckbox label="Subscribe to Newsletter" size="small" />
-    </div>
-  );
-};
-
-export default MyComponent;
-```
-
-## Prompt 4
-**User Question:** Create a webpage with a disabled checkbox labeled "Enable Notifications". When the checkbox is clicked, stop the event from propagating further.
-**Agent Answer:**
-References:
-Analyzing the requirements from the prompt, we need to create a checkbox with a label "Enable Notifications" that is disabled. Additionally, we need to stop the event from propagating further when the checkbox is clicked. We will use the `stopPropagation` method to achieve this.
-
-```tsx
-import React from 'react';
-import { ModusCheckbox } from '@trimble-oss/modus-react-components';
-
-const MyComponent: React.FC = () => {
-  const handleCheckboxClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-  };
-
-  return (
-    <div id="checkbox-container" style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '16px', overflow: 'auto' }}>
-      <ModusCheckbox label="Enable Notifications" disabled onClick={handleCheckboxClick} />
-    </div>
-  );
-};
-
-export default MyComponent;
-```
-
-## Prompt 5
-**User Question:** Create a webpage with a checkbox that has an aria label "Custom Checkbox" and is in an indeterminate state.
-**Agent Answer:**
-References:
-To create a checkbox with an aria label "Custom Checkbox" and set it to an indeterminate state, we use the `ariaLabel` property for the aria label and the `indeterminate` property for the checkbox state. The `ModusCheckbox` component from the Modus design system is utilized for this purpose.
-
-```tsx
-import React from 'react';
-import { ModusCheckbox } from '@trimble-oss/modus-react-components';
-
-const MyComponent: React.FC = () => {
-  return (
-    <div id="checkbox-container" style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '16px', overflow: 'auto' }}>
-      <ModusCheckbox ariaLabel="Custom Checkbox" indeterminate />
-    </div>
-  );
-};
-
-export default MyComponent;
-```
-
 # <ModusDateInput>
 
 ## Prompt 1
@@ -356,19 +256,33 @@ References:
 Analyzing the requirements, we need to create a date range picker with specific labels for the picker and the start and end date inputs. Both inputs should use a specific format and display a calendar icon. The approach involves using the `<ModusDatePicker>` component to encapsulate two `<ModusDateInput>` components, one for the start date and one for the end date. The `label`, `format`, `helperText`, `allowedCharsRegex`, and `showCalendarIcon` properties are set to meet the specified requirements.
 
 ```tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ModusDatePicker, ModusDateInput } from '@trimble-oss/modus-react-components';
 
 const MyComponent: React.FC = () => {
+  useEffect(() => {
+    const datePicker = document.querySelector('modus-date-picker') as HTMLElement;
+    if (datePicker) {
+      const handleValueChange = (event: Event) => {
+        const customEvent = event as CustomEvent<{ value: string }>;
+        console.log('Date range changed:', customEvent.detail.value);
+      };
+      datePicker.addEventListener('valueChange', handleValueChange);
+      return () => {
+        datePicker.removeEventListener('valueChange', handleValueChange);
+      };
+    }
+  }, []);
+
   return (
-    <div id="date-container3" style={{ padding: '16px', overflow: 'auto' }}>
+    <div style={{ padding: '16px', overflow: 'auto' }}>
       <ModusDatePicker label="Travel Dates">
         <ModusDateInput
           type="start"
           label="Start Date"
           format="dd-mm-yyyy"
-          helperText="dd-mm-yyyy"
-          allowedCharsRegex="[\d-]"
+          helperText="(dd-mm-yyyy)"
+          allowedCharsRegex="[d-]"
           showCalendarIcon={true}
           value="2022-12-22"
         />
@@ -376,8 +290,8 @@ const MyComponent: React.FC = () => {
           type="end"
           label="End Date"
           format="dd-mm-yyyy"
-          helperText="dd-mm-yyyy"
-          allowedCharsRegex="[\d-]"
+          helperText="(dd-mm-yyyy)"
+          allowedCharsRegex="[d-]"
           showCalendarIcon={true}
           value="2022-12-22"
         />
@@ -893,6 +807,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 ## Prompt 2
+
 **User Question:** Create a webpage with two number input fields. The first input field should have a label "Quantity", a placeholder "Enter quantity", a helper text "Enter a number between 1 and 100", a minimum value of 1, and a maximum value of 100. The second input field should have a label "Discount", a placeholder "Enter discount", a step value of 0.01, and the text aligned to the right.
 
 **Agent Answer:**
