@@ -1,6 +1,6 @@
 # Modus Implementation Steps
 
-> **⚠️ MANDATORY PROCESS ⚠️**: You MUST follow these steps in exact sequence with no exceptions. For each step, document your actions and findings before proceeding to the next step. **5th step is most important**
+> **⚠️ MANDATORY PROCESS ⚠️**: You MUST follow these steps in exact sequence with no exceptions. For each step, document your actions and findings before proceeding to the next step. **4th step is most important**
 
 ## REQUIRED SEQUENTIAL PROCESS
 
@@ -44,9 +44,8 @@
 
 6. **Final Review and Documentation**
    - Review against initial requirements
-   - Document any deviations or limitations
-   - Create implementation notes for team reference
-    
+   - Check the files against the common mistakes documented in [Common Mistakes](./instructions/lessons-learned/common-mistakes.instructions.md)
+   - Document final implementation details
 
 **Implementation with DOM Events**
    - Follow the proper event handling pattern with refs and useEffect

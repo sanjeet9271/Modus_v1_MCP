@@ -4,11 +4,6 @@
 
 This document provides high-level guidelines for using Modus React components in your applications. For detailed property references and examples, please refer to the companion documents in the Knowledge Base.
 
-## Component References
-
-- For detailed component properties, events, and methods: see [React_Modus_Component_Properties.md](React_Modus_Component_Properties.md)
-- For implementation examples and patterns: see [knowledge_base_final.md](knowledge_base_final.md)
-
 ## Installation
 
 ### Package Installation
@@ -42,44 +37,42 @@ import { defineCustomElements } from '@trimble-oss/modus-web-components/loader';
 defineCustomElements(); 
 ```
 
-## Available Components
+### Angular Framework Setup
 
-### Form Components
+For using Modus with Angular, follow these steps:
 
-- **ModusTextInput**: Text input field for capturing user input
-- **ModusDatePicker**: Calendar popup for selecting dates
-- **ModusCheckbox**: Checkbox selection control
-- **ModusAutocomplete**: Input with autocomplete suggestions
-- **ModusSelect**: For selcting form various options
+1. Install the Modus Angular Components Library and its dependencies:
 
-## Best Practices
+```bash
+npm install @trimble-oss/modus-angular-components --save
+```
 
-1. **Consistency**
-   - Maintain consistent styling across your application
-   - Use the same variant of a component throughout related sections
-   - Follow Modus Design System color palette and spacing
+2. Add the following snippet to your main.ts (or any main module):
 
-2. **Accessibility**
-   - Always include labels for form components
-   - Use `ariaLabel` attributes when appropriate
-   - Ensure sufficient color contrast (4.5:1 minimum)
-   - Support keyboard navigation
+```typescript
+import { defineCustomElements } from '@trimble-oss/modus-web-components/loader';
 
-3. **Responsive Design**
-   - Test components across different viewport sizes
-   - Use appropriate component sizes based on context
-   - Consider mobile touch targets (min 44x44px)
+defineCustomElements();
+```
 
-4. **Form Validation**
-   - Provide clear, concise error messages
-   - Position error feedback close to the error source
-   - Use helper text to provide guidance before errors occur
-   - Validate inputs at appropriate times (on submit, on blur)
+3. Add the CUSTOM_ELEMENTS_SCHEMA to your app.module.ts (or any app module):
 
-5. **Performance**
-   - Avoid unnecessary re-renders of components
-   - Implement pagination for large data sets
-   - Consider lazy loading for complex components
+```typescript
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+@NgModule({
+  // ...other module configurations
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+```
+
+4. Example Usage - add a Modus button in your app.component.html:
+
+```html
+<modus-button color="primary" [disabled]="false">Modus Button</modus-button>
+```
+
+5. Contributing: To contribute to the Modus Angular Components library, please see the Modus Web Components contributing guidelines.
 
 ## Component Selection Guide
 
@@ -89,9 +82,3 @@ When deciding which component to use:
 2. **Simplicity**: Choose the simplest component that meets your requirements
 3. **Consistency**: Use the same component for similar functions across your application
 4. **Feedback**: Ensure components provide appropriate feedback for user interactions
-
-## Additional Resources
-
-- [Trimble Modus Design System](https://modus.trimble.com/)
-- [Modus React Components GitHub](https://github.com/trimble-oss/modus-react-components)
-- [Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/)

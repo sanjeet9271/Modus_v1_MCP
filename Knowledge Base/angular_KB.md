@@ -1,4 +1,4 @@
-# <ModusAccordion>
+#<ModusAccordion>
 
 ## Prompt 1
 **User Question:** How do I create an accordion with expandable and collapsible items?
@@ -106,7 +106,7 @@ customAccordion.querySelectorAll('modus-accordion-item').forEach((item, index) =
 
 
 
-# <ModusAlert>
+#<ModusAlert>
 
 ## Prompt 1
 **User Question:** How do I create different types of alerts in my application?
@@ -251,7 +251,7 @@ successHtmlAlert.addEventListener('dismissClick', (event) => {
 
 
 
-# <ModusAutocomplete>
+#<ModusAutocomplete>
 
 ## Prompt 1
 **User Question:** How do I create a basic autocomplete component with string options?
@@ -388,7 +388,7 @@ if (countrySelector) {
 
 
 
-# <ModusBadge>
+#<ModusBadge>
 
 ## Prompt 1
 **User Question:** How do I create different types of badges with various colors and sizes?
@@ -595,7 +595,7 @@ window.addEventListener('beforeunload', () => {
 
 
 
-# <ModusBreadcrumb>
+#<ModusBreadcrumb>
 
 ## Prompt 1
 **User Question:** How do I create a breadcrumb navigation component for my application?
@@ -784,7 +784,7 @@ dynamicBreadcrumb?.addEventListener('crumbClick', (event) => {
 
 
 
-# <ModusButton>
+#<ModusButton>
 
 ## Prompt 1
 **User Question:** How do I create different button styles and handle button click events?
@@ -1023,7 +1023,7 @@ document.querySelector('#both-icons-btn')?.addEventListener('buttonClick', () =>
 
 
 
-# <ModusButtonGroup>
+#<ModusButtonGroup>
 
 ## Prompt 1
 **User Question:** How do I create a button group with single selection capability?
@@ -1224,7 +1224,7 @@ if (applyFiltersBtn) {
 
 
 
-# <ModusCard>
+#<ModusCard>
 
 ## Prompt 1
 **User Question:** How do I create a basic card component with content and styling?
@@ -1481,7 +1481,7 @@ setupCardInteractions();
 
 
 
-# <ModusCheckbox>
+#<ModusCheckbox>
 
 ## Prompt 1
 **User Question:** How do I create and use checkboxes with different states and sizes?
@@ -1857,7 +1857,7 @@ preferencesForm?.addEventListener('submit', (event) => {
 
 
 
-# <ModusChip>
+#<ModusChip>
 
 ## Prompt 1
 **User Question:** How do I create different types of chips for filtering and selections?
@@ -2224,7 +2224,7 @@ suggestionChips?.forEach(chip => {
 updateSelectedTagsDisplay();
 ```
 
-# <ModusDataTable>
+#<ModusDataTable>
 
 ## Prompt 1
 **User Question:** How do I create a basic data table with columns and data?
@@ -2841,7 +2841,7 @@ function generateMockProductData(count = 10) {
 ```
 
 
-# <ModusDateInput>
+#<ModusDateInput>
 
 ## Prompt 1
 **User Question:** How do I create a basic date input field with a specific format and validation?
@@ -3032,7 +3032,7 @@ if (dateInput && validationMessage) {
 ```
 
 
-# <ModusDropdown>
+#<ModusDropdown>
 
 ## Prompt 1
 **User Question:** How do I create a basic dropdown menu with a button trigger?
@@ -3208,7 +3208,7 @@ if (customDropdown) {
 }
 ```
 
-# <ModusFileDropzone>
+#<ModusFileDropzone>
 
 ## Prompt 1
 **User Question:** How do I implement a basic file upload dropzone that accepts specific file types?
@@ -3472,7 +3472,7 @@ if (clearBtn && documentDropzone) {
 ```
 
 
-# <ModusIcon>
+#<ModusIcon>
 
 ## Prompt 1
 **User Question:** How do I use the basic icon component with different sizes and colors?
@@ -3670,7 +3670,7 @@ if (settingsButton) {
 }
 ```
 
-# <ModusList>
+#<ModusList>
 
 ## Prompt 1
 **User Question:** How do I create a basic list with items of different sizes and states?
@@ -3966,7 +3966,7 @@ if (navMenu) {
 ```
 
 
-# <ModusMessage>
+#<ModusMessage>
 
 ## Prompt 1
 **User Question:** How do I create basic info and question messages with the ModusMessage component?
@@ -4211,7 +4211,7 @@ if (submitBtn) {
 
 
 
-# <ModusModal>
+#<ModusModal>
 
 ## Prompt 1
 **User Question:** How do I create a basic modal dialog with a header and action buttons?
@@ -4547,7 +4547,7 @@ if (openButton && formModal) {
 
 
 
-# <ModusNavbar>
+#<ModusNavbar>
 
 ## Prompt 1
 **User Question:** How do I create a basic navigation bar with a logo, dropdown menu, and profile?
@@ -4938,7 +4938,7 @@ if (advancedNavbar) {
 ```
 
 
-# <ModusNumberInput>
+#<ModusNumberInput>
 
 ## Prompt 1
 **User Question:** How do I create a basic number input field with validation for min and max values?
@@ -5362,7 +5362,7 @@ if (addToCartBtn) {
 }
 ```
 
-# <ModusPagination>
+#<ModusPagination>
 
 ## Prompt 1
 **User Question:** How do I implement basic pagination in my application?
@@ -5443,7 +5443,7 @@ function updatePageContent(page: number) {
 ```
 
 
-# <ModusProgressBar>
+#<ModusProgressBar>
 
 ## Prompt 1
 **User Question:** How do I implement a basic progress bar with percentage display?
@@ -5521,7 +5521,7 @@ function toggleLoading(isLoading) {
 ```
 
 
-# <ModusRadioGroup>
+#<ModusRadioGroup>
 
 ## Prompt 1
 **User Question:** How do I create a simple radio button group with multiple options?
@@ -5657,7 +5657,7 @@ if (serviceTierGroup) {
 
 
 
-# <ModusSelect>
+#<ModusSelect>
 
 ## Prompt 1
 **User Question:** How do I create a basic select dropdown with a list of options?
@@ -5784,7 +5784,7 @@ if (categorySelect && submitButton) {
 
 
 
-# <ModusSentimentScale>
+#<ModusSentimentScale>
 
 ## Prompt 1
 **User Question:** How do I implement a thumbs up/down feedback component?
@@ -5919,7 +5919,7 @@ if (satisfactionScale && satisfactionLevel && followUpQuestion) {
 
 
 
-# <ModusSideNavigation>
+#<ModusSideNavigation>
 
 ## Prompt 1
 **User Question:** How do I create a basic side navigation menu with icons and expandable items?
@@ -6236,7 +6236,7 @@ function updateContent(id: string, isHeaderItem: boolean = false) {
 
 
 
-# <ModusSlider>
+#<ModusSlider>
 
 ## Prompt 1
 **User Question:** How do I create a basic slider control with a label and value range?
@@ -6453,7 +6453,7 @@ if (muteToggle) {
 ```
 
 
-# <ModusSpinner>
+#<ModusSpinner>
 
 ## Prompt 1
 **User Question:** How do I implement loading spinners with different colors and sizes?
@@ -6610,7 +6610,7 @@ if (actionButton && buttonSpinner && customSpinner && customStatus) {
 
 
 
-# <ModusSwitch>
+#<ModusSwitch>
 
 ## Prompt 1
 **User Question:** How do I create a basic toggle switch with a label and handle state changes?
@@ -6789,7 +6789,7 @@ Note to keep in mind:
 
 
 
-# <ModusTable>
+#<ModusTable>
 
 ## Prompt 1
 **User Question:** How do I create a basic data table with sorting and pagination?
@@ -7363,7 +7363,7 @@ if (refreshButton) {
 ```
 
 
-# <ModusTabs>
+#<ModusTabs>
 
 ## Prompt 1
 **User Question:** How do I create a basic tab interface with multiple content sections?
@@ -7741,7 +7741,7 @@ if (productTabs && dashboardContent && loadingOverlay) {
 
 
 
-# <ModusTextInput>
+#<ModusTextInput>
 
 ## Prompt 1
 **User Question:** How do I create a basic text input field with validation and handle its value changes?
@@ -7852,7 +7852,7 @@ function checkPasswordStrength(password: string): 'weak' | 'medium' | 'strong' {
 
 
 
-# <ModusTextareaInput>
+#<ModusTextareaInput>
 
 ## Prompt 1
 **User Question:** How do I create a basic textarea input with character count and validation?
@@ -7994,7 +7994,7 @@ if (notesTextarea && saveStatus && charCount) {
 ```
 
 
-# <ModusTimePicker>
+#<ModusTimePicker>
 
 ## Prompt 1
 **User Question:** How do I create a basic time picker with validation and auto-formatting?
@@ -8139,7 +8139,7 @@ if (schedulePicker && timezoneSelect && summary) {
 
 
 
-# <ModusToast>
+#<ModusToast>
 
 ## Prompt 1
 **User Question:** How do I create and display basic toast notifications with different types and behaviors?
@@ -8346,7 +8346,7 @@ document.querySelector('#multi-step-btn')?.addEventListener('buttonClick', () =>
 
 
 
-# <ModusToolbar>
+#<ModusToolbar>
 
 ## Prompt 1
 **User Question:** How do I create a basic toolbar with buttons and controls?
@@ -8738,7 +8738,7 @@ document.querySelector('#help-btn')?.addEventListener('buttonClick', () => {
 ```
 
 
-# <ModusTreeView>
+#<ModusTreeView>
 
 ## Prompt 1
 **User Question:** How do I create a basic tree view with expandable items and handle selection events?

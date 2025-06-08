@@ -1,4 +1,4 @@
-# <ModusAutocomplete>
+#<ModusAutocomplete>
 
 ## Prompt 1
 **User Question:** Create a webpage with an autocomplete component to search for fruits and display the selected fruit's name below the component?
@@ -185,7 +185,7 @@ export default MyComponent;
 ```
 
 
-# <ModusCheckbox>
+#<ModusCheckbox>
 
 ## Prompt 1
 
@@ -246,7 +246,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusDateInput>
+#<ModusDateInput>
 
 ## Prompt 1
 **User Question:** Create a date range picker with the label "Travel Dates", where the start date input is labeled "Start Date" and the end date input is labeled "End Date"? Both inputs should use the format "dd-mm-yyyy" and display a calendar icon.
@@ -303,7 +303,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusSelect>
+#<ModusSelect>
 
 ## Prompt 1
 **User Question:** Create a webpage with a select input labeled "Choose Option", a placeholder "Select an option", and marked as required. The options should be "Option A", "Option B", and "Option C". Log the selected option to the console when the value changes.
@@ -450,7 +450,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusTextInput>
+#<ModusTextInput>
 
 ## Prompt 1
 **User Question:** Create a form with three text input fields: a required "Username" field with a placeholder "Enter your username", an "Email" field with a placeholder "Enter your email" and an error state "Invalid email", and a "Password" field with a placeholder "Enter your password" and a password text toggle icon.
@@ -604,7 +604,7 @@ export default MyComponent;
 ```
 
 
-# <ModusSwitch>
+#<ModusSwitch>
 
 ## Prompt 1
 **User Question:** Create a webpage with three switches: a small checked switch labeled "Small Switch", a disabled medium switch labeled "Medium Switch", and an interactive medium switch labeled "Interactive Switch" that logs its checked status to the console when clicked?
@@ -645,7 +645,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusTextareaInput>
+#<ModusTextareaInput>
 
 ## Prompt 1
 **User Question:** Create a webpage with a textarea input field that has the following properties: 
@@ -738,7 +738,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusTimePicker>
+#<ModusTimePicker>
 
 ## Prompt 1
 **User Question:** Create a time picker with a label "Appointment Time", placeholder "12:00 AM", and helper text "hh:mm AM/PM" that uses the 12-hour format with AM/PM and includes a time zone selector with options "PST", "EST", and "CST"?
@@ -781,7 +781,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusNumberInput>
+#<ModusNumberInput>
 
 ## Prompt 1
 **User Question:** Create a webpage with three number input fields. The first input field should have a label "Salary", a placeholder "Enter your salary", and display the value in USD currency format for the locale "en-US". The second input field should have a label "Phone Number", an error text "Invalid number", and a placeholder "Enter your phone number". The third input field should have a label "Age", a valid text "Valid age", and a placeholder "Enter your age".
@@ -841,7 +841,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusToast>
+#<ModusToast>
 
 ## Prompt 1
 **User Question:** Create a webpage with 3 toasts: a primary toast with "Welcome" text and dismissible, a success toast with "Operation Successful" text and an icon, and a danger toast with "Error Occurred" text and a 5000ms delay.

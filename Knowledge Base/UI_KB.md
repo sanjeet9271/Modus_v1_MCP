@@ -1,4 +1,4 @@
-# <ModusAccordion>
+#<ModusAccordion>
 
 ## Prompt 1
 **User Question:** Create a webpage with an accordion containing three items, each with a different expand button type, and log messages when items are opened or closed?
@@ -57,7 +57,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusAlert>
+#<ModusAlert>
 
 ## Prompt 1
 **User Question:** Create a webpage with various alert types including default info, dismissible, action button, error, success, warning, and info with a link.
@@ -89,7 +89,7 @@ const AlertExamples: React.FC = () => {
 export default AlertExamples;
 ```
 
-# <ModusBadge>
+#<ModusBadge>
 
 ## Prompt 1
 **User Question:** Create a webpage with 4 badges: a small primary badge with the text "New", a medium secondary badge with the text "Update", a large success badge with the text "Completed", and a small counter badge with the text "5".
@@ -117,7 +117,7 @@ export default MyComponent;
 ```
 
 
-# <ModusBreadcrumb>  
+#<ModusBreadcrumb>  
 
 ## Prompt 1
 **User Question:** Create a breadcrumb component with crumbs "Home", "About", "Services", "Contact" and log the clicked crumb object to the console?
@@ -156,7 +156,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusButtonGroup>
+#<ModusButtonGroup>
 
 ## Prompt 1
 **User Question:** Create a webpage with a button group that has three buttons labeled "Option 1", "Option 2", and "Option 3". The button group should allow only single selection, and the first button should be selected by default.
@@ -183,7 +183,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusButton>
+#<ModusButton>
 
 ## Prompt 1
 **User Question:** Create a webpage with a disabled primary button that shows a loading spinner, a borderless secondary button, and an outline tertiary button.
@@ -212,7 +212,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusCard>
+#<ModusCard>
 
 ## Prompt 1
 **User Question:** Create a card with the title "Welcome", subtitle "Introduction", and content "This is a sample card." The card should have a height of 300px, width of 200px, border radius of 10px, and show a shadow on hover.
@@ -243,7 +243,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusChip>
+#<ModusChip>
 
 ## Prompt 1
 **User Question:** Create a webpage with three chips: an active chip labeled "Active Chip", a disabled chip labeled "Disabled Chip", and an error chip labeled "Error Chip". Each chip should have an image and a close button.
@@ -269,7 +269,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusTreeView>
+#<ModusTreeView>
 
 ## Prompt 1
 
@@ -562,7 +562,7 @@ export default MyComponent;
 
 
 
-# <ModusDataTable>
+#<ModusDataTable>
 
 ## Prompt 1
 **User Question:** Create a table with columns "Name", "Age", and "Contacted". The "Name" column should have a width of 50%, the "Age" column should be right-aligned, and the "Contacted" column should have default settings. The table should have three rows with the following data: {name: 'John', age: 25, contacted: false}, {name: 'Jane', age: 26, contacted: false}, {name: 'Joe', age: 27, contacted: true}.
@@ -598,7 +598,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusDropdown>
+#<ModusDropdown>
 
 ## Prompt 1
 
@@ -636,7 +636,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusFileDropzone>
+#<ModusFileDropzone>
 
 ## Prompt 1
 **User Question:** Create a file dropzone that accepts only PDF files. When a file is uploaded, log the file details and any error to the console. Also, provide a button to add a file programmatically and another button to remove a file by its name.
@@ -694,7 +694,7 @@ export default MyComponent;
 ```
 
 
-# <ModusIcon>
+#<ModusIcon>
 
 ## Prompt 1
 **User Question:** Create a webpage with three icons: a red "home" icon (size 30), a green "settings" icon (size 40), and a blue "user" icon (size 50). Log the name of the clicked icon to the console.
@@ -729,7 +729,7 @@ export default MyComponent;
 ```
 
 
-# <ModusModal>
+#<ModusModal>
 
 ## Prompt 1
 **User Question:** Create a modal with the header text "User Information", primary button text "Submit", and secondary button text "Cancel"? The modal should have a paragraph with the text "Please fill out the form below." and two input fields for "Name" and "Email".
@@ -783,7 +783,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusList>
+#<ModusList>
 
 ## Prompt 3
 
@@ -821,7 +821,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusNavbar>
+#<ModusNavbar>
 
 ## Prompt 1
 **User Question:** Create a webpage with a navbar that includes a main menu, notifications, and a profile menu with a user avatar, email, initials, and sign-out text.
@@ -968,7 +968,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusPagination>
+#<ModusPagination>
 
 ## Prompt 1
 **User Question:** Create a large pagination component for a blog website with a maximum of 50 pages, starting from page 1. The previous and next buttons should be labeled "Previous" and "Next".
@@ -998,7 +998,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusProgressBar>
+#<ModusProgressBar>
 
 ## Prompt 1
 **User Question:** Create a webpage with 3 progress bars. The first progress bar should have a value of 50, a maximum value of 100, a minimum value of 0, and display the text "50%". The second progress bar should be small-sized with a value of 30, a maximum value of 50, a minimum value of 0, and have a background color of red. The third progress bar should be compact-sized, indeterminate mode, and have a color of green.
@@ -1024,7 +1024,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusSentimentScale>
+#<ModusSentimentScale>
 
 ## Prompt 1
 **User Question:** Create a disabled sentiment scale with smiley icons and log the selected sentiment to the console.
@@ -1082,7 +1082,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusSideNavigation>
+#<ModusSideNavigation>
 ## Prompt 1
 **User Question:** Create a webpage with a side navigation that has three items: "Dashboard", "Reports", and "Settings". The "Dashboard" item should have a submenu with "Overview" and "Analytics". The side navigation should be in push mode and should collapse when clicked outside.
 
@@ -1405,7 +1405,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusSlider>
+#<ModusSlider>
 
 ## Prompt 1
 **User Question:** Create a webpage with a slider labeled "Volume" that has a minimum value of 0, a maximum value of 100, and starts at 50. The slider should also have an ariaLabel "volume-slider".
@@ -1435,7 +1435,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusSwitch>
+#<ModusSwitch>
 
 ## Prompt 1
 **User Question:** Create a webpage with three switches: a small checked switch labeled "Small Switch", a disabled medium switch labeled "Medium Switch", and an interactive medium switch labeled "Interactive Switch" that logs its checked status to the console when clicked?
@@ -1476,10 +1476,10 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusTable>
+#<ModusTable>
 Based on your request, I'll create a UserQuestion and AgentAnswer entry for the ModusTable component example, following the format in the UI_KB.md file.
 
-# <ModusTable>
+#<ModusTable>
 
 ## Prompt 1
 **User Question:** Create a detailed data table with columns for personal information including name, age, status, priority, and email. Include features like column resizing, sorting, pagination, row selection, and a toolbar with column visibility options. The table should also display summary rows with totals.
@@ -1593,7 +1593,7 @@ export default MyComponent;
 ```
 
 
-# <ModusToolbar>
+#<ModusToolbar>
 
 ## Prompt 1
 **User Question:** Create a toolbar with three buttons labeled "Save", "Edit", and "Delete". The toolbar should have an aria label "Main Toolbar" and should not be disabled.
@@ -1619,7 +1619,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusTooltip>
+#<ModusTooltip>
 
 ## Prompt 1
 **User Question:** Create a webpage with a tooltip that displays "Hover over me!" at the bottom, initially disabled, wrapping around a button labeled "Click Me".
@@ -1644,7 +1644,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusUtilityPanel>
+#<ModusUtilityPanel>
 
 ## Prompt 1
 **User Question:** Create a webpage with a utility panel that overlays the main content. The utility panel should have a header "Utility Panel Header", a body with the text "This is the body of the utility panel", and a footer "Utility Panel Footer". The panel should be initially collapsed and should expand when a button in the navbar is clicked.
@@ -1735,7 +1735,7 @@ const MyComponent: React.FC = () => {
 export default MyComponent;
 ```
 
-# <ModusTabs>
+#<ModusTabs>
 
 ## Prompt 1
 

@@ -95,3 +95,33 @@ return <ModusButton ref={buttonRef}>Button Text</ModusButton>;
 ### Form Components
 - Always use Modus form components instead of HTML elements
 - Handle validation through component properties when available
+
+
+## Best Practices
+
+1. **Consistency**
+   - Maintain consistent styling across your application
+   - Use the same variant of a component throughout related sections
+   - Follow Modus Design System color palette and spacing
+
+2. **Accessibility**
+   - Always include labels for form components
+   - Use `ariaLabel` attributes when appropriate
+   - Ensure sufficient color contrast (4.5:1 minimum)
+   - Support keyboard navigation
+
+3. **Responsive Design**
+   - Test components across different viewport sizes
+   - Use appropriate component sizes based on context
+   - Consider mobile touch targets (min 44x44px)
+
+4. **Form Validation**
+   - Provide clear, concise error messages
+   - Position error feedback close to the error source
+   - Use helper text to provide guidance before errors occur
+   - Validate inputs at appropriate times (on submit, on blur)
+
+5. **Performance**
+   - Avoid unnecessary re-renders of components
+   - Implement pagination for large data sets
+   - Consider lazy loading for complex components
